@@ -33,7 +33,6 @@ Array.prototype.slice.call(document.getElementsByClassName("formulation")).forEa
     })[0]
 
     let questionHash = hashCode(new XMLSerializer().serializeToString(question))
-    console.log(questionHash)
 
     db.child(questionHash).on('value', function(snapshot) {
         snapshot.forEach(function(childSnapshot) {
