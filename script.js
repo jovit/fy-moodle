@@ -34,7 +34,7 @@ Array.prototype.slice.call(document.getElementsByClassName("questioncorrectnessi
 .map(e => {
   const answer =
   Array.prototype.slice.call(e.parentNode.childNodes).filter(e => {
-    return e.nodeName === "LABEL" || e.nodeName === "SPAN" || e.nodeName === "INPUT"
+    return e.nodeName === "LABEL" || e.nodeName === "SPAN"
   }).map(e => {
     if (e.nodeName === "INPUT") {
       return e.value
@@ -61,6 +61,6 @@ Array.prototype.slice.call(document.getElementsByClassName("questioncorrectnessi
   })[0]
 
   db.child(hashCode(new XMLSerializer().serializeToString(question))).set(
-    {answer: answer, question: new XMLSerializer().serializeToString(question)}
+    {answer: answer}
   );
 })

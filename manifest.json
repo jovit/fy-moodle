@@ -15,7 +15,13 @@
   "content_scripts": [
     {
       "matches": ["http://www.ggte.unicamp.br/eam/mod/quiz/review.php*"],
-      "js": ["firebase.js", "axios.js", "script.js"],
+      "js": ["firebase.js", "script.js"],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": ["http://www.ggte.unicamp.br/eam/mod/quiz/attempt.php*"],
+      "js": ["firebase.js", "fuck-me.js"],
       "run_at": "document_end",
       "all_frames": true
     }
