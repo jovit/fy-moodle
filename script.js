@@ -34,10 +34,8 @@ Array.prototype.slice.call(document.getElementsByClassName("questioncorrectnessi
 .map(e => {
   const answer =
   Array.prototype.slice.call(e.parentNode.childNodes).filter(e => {
-    console.log(e.nodeName)
     return e.nodeName === "LABEL" || e.nodeName === "SPAN" || e.nodeName === "INPUT"
   }).map(e => {
-    console.log(e)
     if (e.nodeName === "INPUT") {
       return e.value
     } else {
@@ -61,8 +59,6 @@ Array.prototype.slice.call(document.getElementsByClassName("questioncorrectnessi
   }).filter(div => {
     return div.className === "qtext"
   })[0]
-
-  console.log(answer, question)
 
   db.child(hashCode(new XMLSerializer().serializeToString(question))).set(
     {answer: answer, question: new XMLSerializer().serializeToString(question)}
