@@ -1,0 +1,25 @@
+{
+  "name": "*FY* MOODLE",
+  "version": "0.0.01",
+  "description": "Nothing to say",
+  "default_locale": "en",
+  "background": {
+    "persistent": false,
+    "scripts": ["navigation_collector.js", "background.js"]
+  },
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://www.ggte.unicamp.br/eam/mod/quiz/review.php*"],
+      "js": ["firebase.js", "axios.js", "script.js"],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "permissions": ["webNavigation", "storage"],
+  "manifest_version": 2
+}
