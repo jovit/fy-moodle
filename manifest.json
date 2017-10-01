@@ -1,17 +1,17 @@
 {
+  "manifest_version": 2,
+
   "name": "*FY* MOODLE",
-  "version": "0.0.01",
+  "version": "0.0.1",
   "description": "Nothing to say",
   "default_locale": "en",
-  "background": {
-    "persistent": false,
-    "scripts": ["navigation_collector.js", "background.js"]
-  },
+  "icons": { "16": "icon/rework-16.png",
+           "48": "icon/rework-48.png",
+          "128": "icon/rework-128.png" },
   "browser_action": {
-    "default_icon": "icon.png",
     "default_popup": "popup.html"
   },
-
+  "permissions": ["webNavigation", "storage"],
   "content_scripts": [
     {
       "matches": ["http://www.ggte.unicamp.br/eam/mod/quiz/review.php*"],
@@ -25,7 +25,5 @@
       "run_at": "document_end",
       "all_frames": true
     }
-  ],
-  "permissions": ["webNavigation", "storage"],
-  "manifest_version": 2
+  ]
 }
