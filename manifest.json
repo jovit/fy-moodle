@@ -14,6 +14,14 @@
   "permissions": ["webNavigation", "storage"],
   "content_scripts": [
     {
+      "matches": ["http://www.ggte.unicamp.br/eam/my/*",
+        "http://www.ggte.unicamp.br/eam/course/view.php?id=*",
+        "http://www.ggte.unicamp.br/eam/grade/report/user/index.php?id=*"],
+      "js": ["firebase.js", "axios.js", "moonshot.js"],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
       "matches": ["http://www.ggte.unicamp.br/eam/mod/quiz/review.php*"],
       "js": ["firebase.js", "script.js"],
       "run_at": "document_end",
