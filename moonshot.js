@@ -85,7 +85,7 @@ classes.forEach(e => {
                                 return e.src.indexOf('incorrect') === -1
                               })
                               .map(e => {
-                                const answer = Array.prototype.slice
+                                let answer = Array.prototype.slice
                                   .call(e.parentNode.childNodes)
                                   .filter(e => {
                                     return (
@@ -156,7 +156,7 @@ classes.forEach(e => {
                                 return e.src.indexOf('incorrect') !== -1
                               })
                               .map(e => {
-                                const answer = Array.prototype.slice
+                                let answer = Array.prototype.slice
                                   .call(e.parentNode.childNodes)
                                   .filter(e => {
                                     return (
