@@ -66,12 +66,12 @@ Array.prototype.slice
                         answer = new XMLSerializer().serializeToString(answer)
                       }
 
-                      answer = answer.replace('.a ', '')
-                      answer = answer.replace('.b ', '')
-                      answer = answer.replace('.c ', '')
-                      answer = answer.replace('.d ', '')
-                      answer = answer.replace('.e ', '')
-                      answer = answer.replace('.f ', '')
+                      answer = answer.replace('a. ', '')
+                      answer = answer.replace('b. ', '')
+                      answer = answer.replace('c. ', '')
+                      answer = answer.replace('d. ', '')
+                      answer = answer.replace('e. ', '')
+                      answer = answer.replace('f. ', '')
 
                       if (answer === childSnapshot.val()) {
                         const input = Array.prototype.slice
@@ -120,12 +120,12 @@ Array.prototype.slice
                         answer = new XMLSerializer().serializeToString(answer)
                       }
 
-                      answer = answer.replace('.a ', '')
-                      answer = answer.replace('.b ', '')
-                      answer = answer.replace('.c ', '')
-                      answer = answer.replace('.d ', '')
-                      answer = answer.replace('.e ', '')
-                      answer = answer.replace('.f ', '')
+                      answer = answer.replace('a. ', '')
+                      answer = answer.replace('b. ', '')
+                      answer = answer.replace('c. ', '')
+                      answer = answer.replace('d. ', '')
+                      answer = answer.replace('e. ', '')
+                      answer = answer.replace('f. ', '')
 
                       if (answer === childSnapshot.val().answer) {
                         const input = Array.prototype.slice

@@ -126,12 +126,12 @@ classes.forEach(e => {
 
                                 const db = firebase.database().ref(`${name}/`)
 
-                                answer = answer.replace('.a ', '')
-                                answer = answer.replace('.b ', '')
-                                answer = answer.replace('.c ', '')
-                                answer = answer.replace('.d ', '')
-                                answer = answer.replace('.e ', '')
-                                answer = answer.replace('.f ', '')
+                                answer = answer.replace('a. ', '')
+                                answer = answer.replace('b. ', '')
+                                answer = answer.replace('c. ', '')
+                                answer = answer.replace('d. ', '')
+                                answer = answer.replace('e. ', '')
+                                answer = answer.replace('f. ', '')
 
                                 db
                                   .child(
@@ -205,12 +205,12 @@ classes.forEach(e => {
                                   .database()
                                   .ref(`${name}/${questionHash}/incorrect`)
 
-                                answer = answer.replace('.a ', '')
-                                answer = answer.replace('.b ', '')
-                                answer = answer.replace('.c ', '')
-                                answer = answer.replace('.d ', '')
-                                answer = answer.replace('.e ', '')
-                                answer = answer.replace('.f ', '')
+                                answer = answer.replace('a. ', '')
+                                answer = answer.replace('b. ', '')
+                                answer = answer.replace('c. ', '')
+                                answer = answer.replace('d. ', '')
+                                answer = answer.replace('e. ', '')
+                                answer = answer.replace('f. ', '')
 
                                 db.child(hashCode(answer)).set({
                                   answer: answer

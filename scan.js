@@ -65,12 +65,12 @@ Array.prototype.slice
       })[0]
 
     const db = firebase.database().ref(`${name}/`)
-    answer = answer.replace('.a ', '')
-    answer = answer.replace('.b ', '')
-    answer = answer.replace('.c ', '')
-    answer = answer.replace('.d ', '')
-    answer = answer.replace('.e ', '')
-    answer = answer.replace('.f ', '')
+    answer = answer.replace('a. ', '')
+    answer = answer.replace('b. ', '')
+    answer = answer.replace('c. ', '')
+    answer = answer.replace('d. ', '')
+    answer = answer.replace('e. ', '')
+    answer = answer.replace('f. ', '')
 
     db.child(hashCode(new XMLSerializer().serializeToString(question))).set({
       answer: answer
@@ -118,12 +118,12 @@ Array.prototype.slice
     const questionHash = hashCode(
       new XMLSerializer().serializeToString(question)
     )
-    answer = answer.replace('.a ', '')
-    answer = answer.replace('.b ', '')
-    answer = answer.replace('.c ', '')
-    answer = answer.replace('.d ', '')
-    answer = answer.replace('.e ', '')
-    answer = answer.replace('.f ', '')
+    answer = answer.replace('a. ', '')
+    answer = answer.replace('b. ', '')
+    answer = answer.replace('c. ', '')
+    answer = answer.replace('d. ', '')
+    answer = answer.replace('e. ', '')
+    answer = answer.replace('f. ', '')
 
     const db = firebase.database().ref(`${name}/${questionHash}/incorrect`)
     db.child(hashCode(answer)).set({
