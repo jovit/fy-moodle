@@ -1,4 +1,4 @@
-const hashCode = function(word) {
+let hashCode = function(word) {
   var hash = 0,
     i,
     chr
@@ -24,7 +24,7 @@ firebase.initializeApp(config)
 document.body.innerHTML +=
   '<div id="loading-popup" style="text-align:center;display:fixed;position:fixed;bottom:0px; opacity: 0.7; width:100%;height:50px;background:yellow;z-index:90; padding-top:15px; color=#000;">Carregando os seus moodles antigos...</div>'
 
-const classes = Array.prototype.slice.call(
+let classes = Array.prototype.slice.call(
   document.getElementsByClassName('type_course')
 )
 
@@ -34,12 +34,12 @@ setTimeout(() => {
 
 classes.forEach(e => {
   let a = e.childNodes[0].childNodes[0]
-  const link = a.href
-  const splitName = a.title.split(' ')
-  const name = splitName[0] + splitName[1]
+  let link = a.href
+  let splitName = a.title.split(' ')
+  let name = splitName[0] + splitName[1]
   if (name[0] === 'F') {
     // console.log(name,link)
-    const gradesLink = link.replace('course/view', 'grade/report/user/index')
+    let gradesLink = link.replace('course/view', 'grade/report/user/index')
     // console.log(gradesLink)
     axios.get(gradesLink).then(page => {
       var fragment = new DocumentFragment()
@@ -123,7 +123,7 @@ classes.forEach(e => {
                                   parent = parent.parentNode
                                 }
 
-                                const question = Array.prototype.slice
+                                let question = Array.prototype.slice
                                   .call(parent.childNodes)
                                   .filter(e => {
                                     return e.nodeName === 'DIV'
@@ -132,7 +132,7 @@ classes.forEach(e => {
                                     return div.className === 'qtext'
                                   })[0]
 
-                                const db = firebase.database().ref(`${name}/`)
+                                let db = firebase.database().ref(`${name}/`)
 
                                 answer = answer.replace('a. ', '')
                                 answer = answer.replace('b. ', '')
@@ -194,7 +194,7 @@ classes.forEach(e => {
                                   parent = parent.parentNode
                                 }
 
-                                const question = Array.prototype.slice
+                                let question = Array.prototype.slice
                                   .call(parent.childNodes)
                                   .filter(e => {
                                     return e.nodeName === 'DIV'
@@ -203,13 +203,13 @@ classes.forEach(e => {
                                     return div.className === 'qtext'
                                   })[0]
 
-                                const questionHash = hashCode(
+                                let questionHash = hashCode(
                                   new XMLSerializer().serializeToString(
                                     question
                                   )
                                 )
 
-                                const db = firebase
+                                let db = firebase
                                   .database()
                                   .ref(`${name}/${questionHash}/incorrect`)
 

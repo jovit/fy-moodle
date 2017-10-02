@@ -1,4 +1,4 @@
-const hashCode = function(word) {
+let hashCode = function(word) {
   var hash = 0,
     i,
     chr
@@ -21,10 +21,10 @@ var config = {
 }
 firebase.initializeApp(config)
 
-const splitName = document
+let splitName = document
   .getElementsByClassName('page-header-headings')[0]
   .childNodes[0].innerHTML.split(' ')
-const name = splitName[0] + splitName[1]
+let name = splitName[0] + splitName[1]
 
 Array.prototype.slice
   .call(document.getElementsByClassName('questioncorrectnessicon'))
@@ -32,7 +32,7 @@ Array.prototype.slice
     return e.src.indexOf('incorrect') === -1
   })
   .map(e => {
-    const answer = Array.prototype.slice
+    let answer = Array.prototype.slice
       .call(e.parentNode.childNodes)
       .filter(e => {
         return e.nodeName === 'LABEL' || e.nodeName === 'SPAN'
@@ -55,7 +55,7 @@ Array.prototype.slice
       parent = parent.parentNode
     }
 
-    const question = Array.prototype.slice
+    let question = Array.prototype.slice
       .call(parent.childNodes)
       .filter(e => {
         return e.nodeName === 'DIV'
@@ -64,7 +64,7 @@ Array.prototype.slice
         return div.className === 'qtext'
       })[0]
 
-    const db = firebase.database().ref(`${name}/`)
+    let db = firebase.database().ref(`${name}/`)
     answer = answer.replace('a. ', '')
     answer = answer.replace('b. ', '')
     answer = answer.replace('c. ', '')
@@ -83,7 +83,7 @@ Array.prototype.slice
     return e.src.indexOf('incorrect') !== -1
   })
   .map(e => {
-    const answer = Array.prototype.slice
+    let answer = Array.prototype.slice
       .call(e.parentNode.childNodes)
       .filter(e => {
         return e.nodeName === 'LABEL' || e.nodeName === 'SPAN'
@@ -106,7 +106,7 @@ Array.prototype.slice
       parent = parent.parentNode
     }
 
-    const question = Array.prototype.slice
+    let question = Array.prototype.slice
       .call(parent.childNodes)
       .filter(e => {
         return e.nodeName === 'DIV'
@@ -115,9 +115,7 @@ Array.prototype.slice
         return div.className === 'qtext'
       })[0]
 
-    const questionHash = hashCode(
-      new XMLSerializer().serializeToString(question)
-    )
+    let questionHash = hashCode(new XMLSerializer().serializeToString(question))
     answer = answer.replace('a. ', '')
     answer = answer.replace('b. ', '')
     answer = answer.replace('c. ', '')
@@ -125,7 +123,7 @@ Array.prototype.slice
     answer = answer.replace('e. ', '')
     answer = answer.replace('f. ', '')
 
-    const db = firebase.database().ref(`${name}/${questionHash}/incorrect`)
+    let db = firebase.database().ref(`${name}/${questionHash}/incorrect`)
     db.child(hashCode(answer)).set({
       answer: answer
     })

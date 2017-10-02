@@ -1,4 +1,4 @@
-const hashCode = function(word) {
+let hashCode = function(word) {
   var hash = 0,
     i,
     chr
@@ -21,10 +21,10 @@ var config = {
 }
 firebase.initializeApp(config)
 
-const splitName = document
+let splitName = document
   .getElementsByClassName('page-header-headings')[0]
   .childNodes[0].innerHTML.split(' ')
-const name = splitName[0] + splitName[1]
+let name = splitName[0] + splitName[1]
 
 Array.prototype.slice
   .call(document.getElementsByClassName('formulation'))
@@ -74,7 +74,7 @@ Array.prototype.slice
                       answer = answer.replace('f. ', '')
 
                       if (answer === childSnapshot.val()) {
-                        const input = Array.prototype.slice
+                        let input = Array.prototype.slice
                           .call(e.parentNode.childNodes)
                           .filter(e => {
                             return e.nodeName === 'INPUT'
@@ -128,7 +128,7 @@ Array.prototype.slice
                       answer = answer.replace('f. ', '')
 
                       if (answer === childSnapshot.val().answer) {
-                        const input = Array.prototype.slice
+                        let input = Array.prototype.slice
                           .call(e.parentNode.childNodes)
                           .filter(e => {
                             return e.nodeName === 'INPUT'
