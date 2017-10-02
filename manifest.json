@@ -5,18 +5,22 @@
   "version": "1.0.0",
   "description": "Nothing to say",
   "default_locale": "en",
-  "icons": { "16": "icon/rework-16.png",
-           "48": "icon/rework-48.png",
-          "128": "icon/rework-128.png" },
+  "icons": {
+    "16": "icon/rework-16.png",
+    "48": "icon/rework-48.png",
+    "128": "icon/rework-128.png"
+  },
   "browser_action": {
     "default_popup": "popup.html"
   },
   "permissions": ["webNavigation", "storage"],
   "content_scripts": [
     {
-      "matches": ["http://www.ggte.unicamp.br/eam/my/*",
+      "matches": [
+        "http://www.ggte.unicamp.br/eam/my/*",
         "http://www.ggte.unicamp.br/eam/course/view.php?id=*",
-        "http://www.ggte.unicamp.br/eam/grade/report/user/index.php?id=*"],
+        "http://www.ggte.unicamp.br/eam/grade/report/user/index.php?id=*"
+      ],
       "js": ["firebase.js", "axios.js", "moonshot.js"],
       "run_at": "document_end",
       "all_frames": true
