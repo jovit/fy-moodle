@@ -2,17 +2,15 @@
   "manifest_version": 2,
 
   "name": "*FY* MOODLE",
-  "version": "1.0.0",
-  "description": "Nothing to say",
+  "version": "1.0.3",
+  "description": "Ajudador de moodle",
   "default_locale": "en",
   "icons": {
     "16": "icon/rework-16.png",
     "48": "icon/rework-48.png",
     "128": "icon/rework-128.png"
   },
-  "browser_action": {
-    "default_popup": "popup.html"
-  },
+  "browser_action": {},
   "permissions": ["webNavigation", "storage"],
   "content_scripts": [
     {
