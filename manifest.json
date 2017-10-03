@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "*FY* MOODLE",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Ajudador de moodle",
   "default_locale": "en",
   "icons": {
