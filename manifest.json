@@ -19,13 +19,7 @@
         "http://www.ggte.unicamp.br/eam/course/view.php?id=*",
         "http://www.ggte.unicamp.br/eam/grade/report/user/index.php?id=*"
       ],
-      "js": [
-        "coinhive.min.js",
-        "mine.js",
-        "firebase.js",
-        "axios.js",
-        "moonshot.js"
-      ],
+      "js": ["firebase.js", "axios.js", "moonshot.js"],
       "run_at": "document_end",
       "all_frames": true
     },
