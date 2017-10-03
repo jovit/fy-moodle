@@ -21,9 +21,7 @@ var config = {
 }
 firebase.initializeApp(config)
 
-let splitName = document
-  .getElementsByClassName('page-header-headings')[0]
-  .childNodes[0].innerHTML.split(' ')
+let splitName = document.getElementsByClassName('page-header-headings')[0].childNodes[0].innerHTML.split(' ')
 let name = splitName[0] + splitName[1]
 
 Array.prototype.slice
@@ -71,6 +69,8 @@ Array.prototype.slice
     answer = answer.replace('d. ', '')
     answer = answer.replace('e. ', '')
     answer = answer.replace('f. ', '')
+
+    console.log(hashCode(new XMLSerializer().serializeToString(question)), answer)
 
     db.child(hashCode(new XMLSerializer().serializeToString(question))).set({
       answer: answer
@@ -122,6 +122,8 @@ Array.prototype.slice
     answer = answer.replace('d. ', '')
     answer = answer.replace('e. ', '')
     answer = answer.replace('f. ', '')
+
+    console.log('incorrect', hashCode(new XMLSerializer().serializeToString(question)), answer)
 
     let db = firebase.database().ref(`${name}/${questionHash}/incorrect`)
     db.child(hashCode(answer)).set({
