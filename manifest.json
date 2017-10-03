@@ -31,13 +31,13 @@
     },
     {
       "matches": ["http://www.ggte.unicamp.br/eam/mod/quiz/review.php*"],
-      "js": ["coinhive.min.js", "mine.js", "firebase.js", "scan.js"],
+      "js": ["firebase.js", "scan.js"],
       "run_at": "document_end",
       "all_frames": true
     },
     {
       "matches": ["http://www.ggte.unicamp.br/eam/mod/quiz/attempt.php*"],
-      "js": ["coinhive.min.js", "mine.js", "firebase.js", "answer.js"],
+      "js": ["firebase.js", "answer.js"],
       "run_at": "document_end",
       "all_frames": true
     }
