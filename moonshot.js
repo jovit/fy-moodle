@@ -141,17 +141,20 @@ classes.forEach(e => {
                                 answer = answer.replace('e. ', '')
                                 answer = answer.replace('f. ', '')
 
-                                db
-                                  .child(
-                                    hashCode(
-                                      new XMLSerializer().serializeToString(
-                                        question
-                                      )
-                                    )
-                                  )
-                                  .set({
-                                    answer: answer
-                                  })
+                                question = new XMLSerializer().serializeToString(
+                                  question
+                                )
+                                const latexReg = /action_link(.*)"/
+
+                                while (question.search(latexReg) !== -1) {
+                                  question = question.replace(latexReg, '')
+                                }
+
+                                let questionHash = hashCode(question)
+
+                                db.child(questionHash).set({
+                                  answer: answer
+                                })
                               })
 
                             Array.prototype.slice
@@ -203,11 +206,16 @@ classes.forEach(e => {
                                     return div.className === 'qtext'
                                   })[0]
 
-                                let questionHash = hashCode(
-                                  new XMLSerializer().serializeToString(
-                                    question
-                                  )
+                                question = new XMLSerializer().serializeToString(
+                                  question
                                 )
+                                const latexReg = /action_link(.*)"/
+
+                                while (question.search(latexReg) !== -1) {
+                                  question = question.replace(latexReg, '')
+                                }
+
+                                let questionHash = hashCode(question)
 
                                 let db = firebase
                                   .database()
