@@ -115,7 +115,15 @@ Array.prototype.slice
         return div.className === 'qtext'
       })[0]
 
-    let questionHash = hashCode(new XMLSerializer().serializeToString(question))
+    let questionText = new XMLSerializer().serializeToString(question)
+
+    const latexReg = /action_link(.*)"/
+
+    while (questionText.search(latexReg) !== -1) {
+      questionText = questionText.replace(latexReg, '')
+    }
+
+    let questionHash = hashCode(questionText)
     answer = answer.replace('a. ', '')
     answer = answer.replace('b. ', '')
     answer = answer.replace('c. ', '')

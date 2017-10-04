@@ -36,12 +36,20 @@ Array.prototype.slice
         return div.className === 'qtext'
       })[0]
 
-    let questionHash = hashCode(new XMLSerializer().serializeToString(question))
+    let questionText = new XMLSerializer().serializeToString(question)
 
-    let db = firebase.database().ref(`${name}/`)
+    const latexReg = /action_link(.*)"/
 
-    db.child(questionHash).on('value', function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
+    while (questionText.search(latexReg) !== -1) {
+      questionText = questionText.replace(latexReg, '')
+    }
+
+    let questionHash = hashCode(questionText)
+
+    let db = firebase.database().ref(`${name}/${questionHash}/`)
+
+    db.on('value', function(snapshot) {
+      if (snapshot.val()) {
         Array.prototype.slice
           .call(question.parentNode.childNodes)
           .filter(e => {
@@ -73,7 +81,18 @@ Array.prototype.slice
                       answer = answer.replace('e. ', '')
                       answer = answer.replace('f. ', '')
 
-                      if (answer === childSnapshot.val()) {
+                      const latexReg = /action_link(.*)"/
+
+                      while (answer.search(latexReg) !== -1) {
+                        answer = answer.replace(latexReg, '')
+                      }
+
+                      let expectedAnswer = snapshot.val().answer
+                      while (expectedAnswer.search(latexReg) !== -1) {
+                        expectedAnswer = expectedAnswer.replace(latexReg, '')
+                      }
+
+                      if (answer === expectedAnswer) {
                         let input = Array.prototype.slice
                           .call(e.parentNode.childNodes)
                           .filter(e => {
@@ -89,59 +108,72 @@ Array.prototype.slice
                 )
               })
           )
-      })
+      }
     })
 
     db = firebase.database().ref(`${name}/${questionHash}/incorrect`)
 
     db.on('value', function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
-        Array.prototype.slice
-          .call(question.parentNode.childNodes)
-          .filter(e => {
-            return e.className === 'ablock'
-          })
-          .forEach(e =>
-            Array.prototype.slice
-              .call(e.childNodes)
-              .filter(e => {
-                return e.className === 'answer'
-              })
-              .forEach(e => {
-                Array.prototype.slice.call(e.childNodes).map(e =>
-                  Array.prototype.slice
-                    .call(e.childNodes)
-                    .filter(e => {
-                      return e.nodeName === 'LABEL' || e.nodeName === 'SPAN'
-                    })
-                    .filter(e => {
-                      let answer = e.innerHTML
-                      if (!typeof answer === 'string') {
-                        answer = new XMLSerializer().serializeToString(answer)
-                      }
-
-                      answer = answer.replace('a. ', '')
-                      answer = answer.replace('b. ', '')
-                      answer = answer.replace('c. ', '')
-                      answer = answer.replace('d. ', '')
-                      answer = answer.replace('e. ', '')
-                      answer = answer.replace('f. ', '')
-
-                      if (answer === childSnapshot.val().answer) {
-                        let input = Array.prototype.slice
-                          .call(e.parentNode.childNodes)
-                          .filter(e => {
-                            return e.nodeName === 'INPUT'
-                          })[0]
-
-                        if (input.type === 'radio') {
-                          e.style.background = 'red'
+        if (childSnapshot.val()) {
+          Array.prototype.slice
+            .call(question.parentNode.childNodes)
+            .filter(e => {
+              return e.className === 'ablock'
+            })
+            .forEach(e =>
+              Array.prototype.slice
+                .call(e.childNodes)
+                .filter(e => {
+                  return e.className === 'answer'
+                })
+                .forEach(e => {
+                  Array.prototype.slice.call(e.childNodes).map(e =>
+                    Array.prototype.slice
+                      .call(e.childNodes)
+                      .filter(e => {
+                        return e.nodeName === 'LABEL' || e.nodeName === 'SPAN'
+                      })
+                      .filter(e => {
+                        let answer = e.innerHTML
+                        if (!typeof answer === 'string') {
+                          answer = new XMLSerializer().serializeToString(answer)
                         }
-                      }
-                    })
-                )
-              })
-          )
+
+                        answer = answer.replace('a. ', '')
+                        answer = answer.replace('b. ', '')
+                        answer = answer.replace('c. ', '')
+                        answer = answer.replace('d. ', '')
+                        answer = answer.replace('e. ', '')
+                        answer = answer.replace('f. ', '')
+
+                        const latexReg = /action_link(.*)"/
+
+                        while (answer.search(latexReg) !== -1) {
+                          answer = answer.replace(latexReg, '')
+                        }
+
+                        let expectedAnswer = childSnapshot.val().answer
+                        while (expectedAnswer.search(latexReg) !== -1) {
+                          expectedAnswer = expectedAnswer.replace(latexReg, '')
+                        }
+
+                        if (answer === expectedAnswer) {
+                          let input = Array.prototype.slice
+                            .call(e.parentNode.childNodes)
+                            .filter(e => {
+                              return e.nodeName === 'INPUT'
+                            })[0]
+
+                          if (input.type === 'radio') {
+                            e.style.background = 'red'
+                          }
+                        }
+                      })
+                  )
+                })
+            )
+        }
       })
     })
   })
