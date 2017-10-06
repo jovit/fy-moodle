@@ -10,24 +10,15 @@ function hashCode(word) {
 }
 
 function collectAnswers(homePageHtml) {
-  // var config = {
-  //   apiKey: 'AIzaSyAXRiEgsWNrmRfPQ8KbXY-0PnZjsAm4INI',
-  //   authDomain: 'fy-moodle.firebaseapp.com',
-  //   databaseURL: 'https://fy-moodle.firebaseio.com',
-  //   projectId: 'fy-moodle',
-  //   storageBucket: 'fy-moodle.appspot.com',
-  //   messagingSenderId: '944849265962'
-  // }
-  // firebase.initializeApp(config)
   var config = {
-    apiKey: "AIzaSyCfI1g-1KfhfTXVikM2hY7ochuT0W-0naI",
-    authDomain: "fy-moodle-test-area.firebaseapp.com",
-    databaseURL: "https://fy-moodle-test-area.firebaseio.com",
-    projectId: "fy-moodle-test-area",
-    storageBucket: "fy-moodle-test-area.appspot.com",
-    messagingSenderId: "291524795540"
-  };
-  firebase.initializeApp(config);
+    apiKey: 'AIzaSyAXRiEgsWNrmRfPQ8KbXY-0PnZjsAm4INI',
+    authDomain: 'fy-moodle.firebaseapp.com',
+    databaseURL: 'https://fy-moodle.firebaseio.com',
+    projectId: 'fy-moodle',
+    storageBucket: 'fy-moodle.appspot.com',
+    messagingSenderId: '944849265962'
+  }
+  firebase.initializeApp(config)
 
   var fragment = new DocumentFragment()
   var html = document.createElement('html')
