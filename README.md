@@ -8,3 +8,6 @@
 - Select the unpacked file
 - Confirm any Chrome confirmation popups that might appear
 - Profit
+
+Link to the packed extension on Chrome Web Store:
+https://chrome.google.com/webstore/detail/fy-moodle/lcmieboflejgnjckknpmamhmbmngedke?hl=pt-BR&gl=BR
