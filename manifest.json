@@ -2,24 +2,25 @@
   "manifest_version": 2,
 
   "name": "*FY* MOODLE",
-  "version": "1.0.4",
-  "description": "Ajudador de moodle",
+  "version": "1.1",
+  "description": "Moodle Helper",
   "default_locale": "en",
   "icons": {
     "16": "icon/16.png",
     "48": "icon/48.png",
     "128": "icon/128.png"
   },
+  "background": {
+    "scripts": ["collector.js","firebase.js","axios.js"],
+    "persistent": false
+  },
+  "web_accessible_resources":["collector.js"],
   "browser_action": {},
-  "permissions": ["webNavigation", "storage"],
+  "permissions": ["webNavigation", "storage", "alarms", "*://*.ggte.unicamp.br/eam/*"],
   "content_scripts": [
     {
-      "matches": [
-        "http://www.ggte.unicamp.br/eam/my/*",
-        "http://www.ggte.unicamp.br/eam/course/view.php?id=*",
-        "http://www.ggte.unicamp.br/eam/grade/report/user/index.php?id=*"
-      ],
-      "js": ["firebase.js", "axios.js", "moonshot.js"],
+      "matches": ["http://www.ggte.unicamp.br/eam/my/*"],
+      "js": ["firebase.js", "axios.js", "watchdog.js"],
       "run_at": "document_end",
       "all_frames": true
     },
