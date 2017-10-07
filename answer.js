@@ -1,3 +1,10 @@
+var _AnalyticsCode = 'UA-107698779-1';
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', _AnalyticsCode]);
+_gaq.push(['_trackPageview']);
+
+
 let hashCode = function(word) {
   var hash = 0,
     i,
@@ -102,6 +109,7 @@ Array.prototype.slice
                         if (input.type === 'radio') {
                           input.checked = true
                           e.style.background = 'green'
+                          _gaq.push(['_trackEvent', 'attempt', 'rightAnswer'])
                         }
                       }
                     })
@@ -167,6 +175,7 @@ Array.prototype.slice
 
                           if (input.type === 'radio') {
                             e.style.background = 'red'
+                            _gaq.push(['_trackEvent', 'attempt', 'wrongAnswer'])
                           }
                         }
                       })
