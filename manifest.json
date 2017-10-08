@@ -2,16 +2,15 @@
   "manifest_version": 2,
 
   "name": "*FY* MOODLE",
-  "version": "1.1",
+  "version": "1.1.1",
   "description": "Moodle Helper",
-  "default_locale": "en",
   "icons": {
     "16": "icon/16.png",
     "48": "icon/48.png",
     "128": "icon/128.png"
   },
   "background": {
-    "scripts": ["collector.js","firebase.js","axios.js"],
+    "scripts": ["collector.js","firebase.js","axios.js","ga.js"],
     "persistent": false
   },
   "web_accessible_resources":["collector.js"],
@@ -20,7 +19,7 @@
   "content_scripts": [
     {
       "matches": ["http://www.ggte.unicamp.br/eam/my/*"],
-      "js": ["firebase.js", "axios.js", "watchdog.js"],
+      "js": ["firebase.js", "axios.js", "ga.js", "watchdog.js"],
       "run_at": "document_end",
       "all_frames": true
     },
@@ -32,7 +31,7 @@
     },
     {
       "matches": ["http://www.ggte.unicamp.br/eam/mod/quiz/attempt.php*"],
-      "js": ["firebase.js", "answer.js"],
+      "js": ["firebase.js", "answer.js", "ga.js"],
       "run_at": "document_end",
       "all_frames": true
     }

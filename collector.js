@@ -1,3 +1,10 @@
+var _AnalyticsCode = 'UA-107698779-1';
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', _AnalyticsCode]);
+_gaq.push(['_trackPageview']);
+
+
 function hashCode(word) {
   var hash = 0, i, chr
   if (word.length === 0) return hash
@@ -151,6 +158,7 @@ function collectAnswers(homePageHtml) {
                               db.child(questionHash).set({
                                 answer: answer
                               })
+                              _gaq.push(['_trackEvent', 'collecting', name+'-correct'])
                             })
 
                           Array.prototype.slice
@@ -227,6 +235,7 @@ function collectAnswers(homePageHtml) {
                               db.child(hashCode(answer)).set({
                                 answer: answer
                               })
+                              _gaq.push(['_trackEvent', 'collecting', name+'-incorrect'])
                             })
                         })
                       }
