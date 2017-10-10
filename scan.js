@@ -1,3 +1,11 @@
+var _AnalyticsCode = 'UA-107698779-1';
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', _AnalyticsCode]);
+_gaq.push(['_trackPageview']);
+
+_gaq.push(['_trackEvent', 'review', 'entered'])
+
 let hashCode = function(word) {
   var hash = 0,
     i,
@@ -72,9 +80,18 @@ Array.prototype.slice
     answer = answer.replace('e. ', '')
     answer = answer.replace('f. ', '')
 
-    db.child(hashCode(new XMLSerializer().serializeToString(question))).set({
-      answer: answer
-    })
+    question = new XMLSerializer().serializeToString(question)
+
+    const latexReg = /action_link(.*)"/
+
+    while (question.search(latexReg) !== -1) {
+      question = question.replace(latexReg, '')
+    }
+
+    let questionHash = hashCode(question)
+
+    db.child(questionHash).set({answer: answer})
+    _gaq.push(['_trackEvent', 'scan', name+'-correct'])
   })
 
 Array.prototype.slice
@@ -132,7 +149,6 @@ Array.prototype.slice
     answer = answer.replace('f. ', '')
 
     let db = firebase.database().ref(`${name}/${questionHash}/incorrect`)
-    db.child(hashCode(answer)).set({
-      answer: answer
-    })
+    db.child(hashCode(answer)).set({answer: answer})
+    _gaq.push(['_trackEvent', 'scan', name+'-incorrect'])
   })

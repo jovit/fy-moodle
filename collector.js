@@ -155,9 +155,7 @@ function collectAnswers(homePageHtml) {
 
                               let questionHash = hashCode(question)
 
-                              db.child(questionHash).set({
-                                answer: answer
-                              })
+                              db.child(questionHash).set({answer: answer})
                               _gaq.push(['_trackEvent', 'collecting', name+'-correct'])
                             })
 
