@@ -72,9 +72,16 @@ Array.prototype.slice
     answer = answer.replace('e. ', '')
     answer = answer.replace('f. ', '')
 
-    db.child(hashCode(new XMLSerializer().serializeToString(question))).set({
-      answer: answer
-    })
+    const latexReg = /action_link(.*)"/
+
+    while (question.search(latexReg) !== -1) {
+      question = question.replace(latexReg, '')
+    }
+
+    let questionHash = hashCode(question)
+
+    db.child(questionHash).set({answer: answer})
+
   })
 
 Array.prototype.slice
