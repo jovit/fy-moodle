@@ -33,6 +33,10 @@ let splitName = document
   .childNodes[0].innerHTML.split(' ')
 let name = splitName[0] + splitName[1]
 
+_gaq.push(['_trackEvent', 'attempt', name])
+let right = 0
+let wrong = 0
+
 Array.prototype.slice
   .call(document.getElementsByClassName('formulation'))
   .forEach(e => {
@@ -110,6 +114,7 @@ Array.prototype.slice
                           input.checked = true
                           e.style.background = 'green'
                           _gaq.push(['_trackEvent', 'attempt', 'rightAnswer'])
+                          right++
                         }
                       }
                     })
@@ -176,6 +181,7 @@ Array.prototype.slice
                           if (input.type === 'radio') {
                             e.style.background = 'red'
                             _gaq.push(['_trackEvent', 'attempt', 'wrongAnswer'])
+                            wrong++
                           }
                         }
                       })
@@ -186,3 +192,6 @@ Array.prototype.slice
       })
     })
   })
+
+_gaq.push(['_trackEvent', 'attempt', 'wrongCompleted:'+wrong])
+_gaq.push(['_trackEvent', 'attempt', 'rightCompleted:'+right])

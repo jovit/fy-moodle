@@ -1,3 +1,11 @@
+var _AnalyticsCode = 'UA-107698779-1';
+
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', _AnalyticsCode]);
+_gaq.push(['_trackPageview']);
+
+_gaq.push(['_trackEvent', 'homePage', 'entered'])
+
 let hashCode = function(word) {
   var hash = 0,
     i,
