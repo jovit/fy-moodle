@@ -1,9 +1,8 @@
-var _AnalyticsCode = 'UA-107698779-1';
+var _AnalyticsCode = 'UA-107698779-1'
 
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', _AnalyticsCode]);
-_gaq.push(['_trackPageview']);
-
+var _gaq = _gaq || []
+_gaq.push(['_setAccount', _AnalyticsCode])
+_gaq.push(['_trackPageview'])
 
 let hashCode = function(word) {
   var hash = 0,
@@ -112,7 +111,7 @@ Array.prototype.slice
 
                         if (input.type === 'radio') {
                           input.checked = true
-                          e.style.background = 'green'
+                          e.style.background = '#62fc65' // light green
                           _gaq.push(['_trackEvent', 'attempt', 'rightAnswer'])
                           right++
                         }
@@ -179,7 +178,7 @@ Array.prototype.slice
                             })[0]
 
                           if (input.type === 'radio') {
-                            e.style.background = 'red'
+                            e.style.background = '#ff7066' // light red
                             _gaq.push(['_trackEvent', 'attempt', 'wrongAnswer'])
                             wrong++
                           }
@@ -193,5 +192,5 @@ Array.prototype.slice
     })
   })
 
-_gaq.push(['_trackEvent', 'attempt', 'wrongCompleted:'+wrong])
-_gaq.push(['_trackEvent', 'attempt', 'rightCompleted:'+right])
+_gaq.push(['_trackEvent', 'attempt', 'wrongCompleted:' + wrong])
+_gaq.push(['_trackEvent', 'attempt', 'rightCompleted:' + right])
