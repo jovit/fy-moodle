@@ -1,37 +1,35 @@
 {
   "manifest_version": 2,
-
-  "name": "*FY* MOODLE",
-  "version": "1.1.2",
+  "name": "fy-moodle",
   "description": "Moodle Helper",
+  "version": "1.2.0",
   "icons": {
-    "16": "icon/16.png",
-    "48": "icon/48.png",
-    "128": "icon/128.png"
+    "16": "assets/16.png",
+    "48": "assets/48.png",
+    "128": "assets/128.png"
   },
+  "permissions": ["webNavigation", "storage", "alarms", "*://*.ggte.unicamp.br/eam/*"],
+  "browser_action": {},
   "background": {
-    "scripts": ["collector.js","firebase.js","axios.js","ga.js"],
+    "scripts": ["reload.js", "background.js"],
     "persistent": false
   },
-  "web_accessible_resources":["collector.js"],
-  "browser_action": {},
-  "permissions": ["webNavigation", "storage", "alarms", "*://*.ggte.unicamp.br/eam/*"],
   "content_scripts": [
     {
       "matches": ["http://www.ggte.unicamp.br/eam/my/*"],
-      "js": ["firebase.js", "axios.js", "ga.js", "watchdog.js"],
-      "run_at": "document_end",
-      "all_frames": true
-    },
-    {
-      "matches": ["http://www.ggte.unicamp.br/eam/mod/quiz/review.php*"],
-      "js": ["firebase.js", "scan.js"],
+      "js": ["background.js"],
       "run_at": "document_end",
       "all_frames": true
     },
     {
       "matches": ["http://www.ggte.unicamp.br/eam/mod/quiz/attempt.php*"],
-      "js": ["firebase.js", "answer.js", "ga.js"],
+      "js": ["answer.js"],
+      "run_at": "document_end",
+      "all_frames": true
+    },
+    {
+      "matches": ["http://www.ggte.unicamp.br/eam/mod/quiz/review.php*"],
+      "js": ["scan.js"],
       "run_at": "document_end",
       "all_frames": true
     }

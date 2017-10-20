@@ -1,0 +1,37 @@
+{
+  "name": "fy-moodle",
+  "version": "1.2.0",
+  "description": "Moodle Helper",
+  "scripts": {
+    "start": "node ./node_modules/gulp/bin/gulp.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "João Vitor Araki Gonçalves",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "firebase": "^4.6.0"
+  },
+  "devDependencies": {
+    "babel-core": "^5.2.11",
+    "babel-eslint": "^3.0.1",
+    "babel-loader": "^5.0.0",
+    "crx": "^3.0.2",
+    "gulp": "^3.8.11",
+    "gulp-bump": "^0.3.1",
+    "gulp-clean": "^0.3.1",
+    "gulp-eslint": "^0.11.1",
+    "gulp-replace": "^0.5.3",
+    "gutil": "^1.6.4",
+    "mkdirp": "^0.5.1",
+    "run-sequence": "^1.1.0",
+    "webpack": "^1.8.11"
+  }
+}
