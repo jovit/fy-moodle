@@ -110,7 +110,7 @@ Array.prototype.slice
                           })[0]
 
                         if (input.type === 'radio') {
-                          input.checked = true
+                          // input.checked = true
                           e.style.background = '#62fc65' // light green
                           _gaq.push(['_trackEvent', 'attempt', 'rightAnswer'])
                           right++
