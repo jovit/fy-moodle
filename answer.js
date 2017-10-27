@@ -73,6 +73,7 @@ Array.prototype.slice
                 return e.className === 'answer'
               })
               .forEach(e => {
+                const questionWrapper = e
                 Array.prototype.slice.call(e.childNodes).map(e =>
                   Array.prototype.slice
                     .call(e.childNodes)
@@ -111,8 +112,14 @@ Array.prototype.slice
                           })[0]
 
                         if (input.type === 'radio') {
-                          input.checked = true
-                          e.style.background = 'green'
+                          let button = document.createElement('input')
+                          button.type = 'button'
+                          button.value = 'Clique para mostrar a resposta certa'
+                          button.addEventListener('click', () => {
+                            e.style.background = '#62fc65' // light green
+                          })
+
+                          questionWrapper.appendChild(button)
                           _gaq.push(['_trackEvent', 'attempt', 'rightAnswer'])
                           right++
                         }
@@ -141,6 +148,7 @@ Array.prototype.slice
                   return e.className === 'answer'
                 })
                 .forEach(e => {
+                  const questionWrapper = e
                   Array.prototype.slice.call(e.childNodes).map(e =>
                     Array.prototype.slice
                       .call(e.childNodes)
@@ -179,7 +187,27 @@ Array.prototype.slice
                             })[0]
 
                           if (input.type === 'radio') {
-                            e.style.background = 'red'
+                            const previousButton = questionWrapper.getElementsByClassName(
+                              'show-wrong'
+                            )[0]
+                            console.log(previousButton)
+                            if (previousButton) {
+                              console.log('previous')
+                              previousButton.addEventListener('click', () => {
+                                e.style.background = '#ff7066' // light red
+                              })
+                            } else {
+                              let button = document.createElement('input')
+                              button.className = 'show-wrong'
+                              button.type = 'button'
+                              button.style.background = '#ff7066' // light red
+                              button.value =
+                                'Clique para mostrar as respostas erradas'
+                              button.addEventListener('click', () => {
+                                e.style.background = '#ff7066' // light red
+                              })
+                              questionWrapper.appendChild(button)
+                            }
                             _gaq.push(['_trackEvent', 'attempt', 'wrongAnswer'])
                             wrong++
                           }
