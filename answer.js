@@ -1,8 +1,9 @@
-var _AnalyticsCode = 'UA-107698779-1'
+var _AnalyticsCode = 'UA-107698779-1';
 
-var _gaq = _gaq || []
-_gaq.push(['_setAccount', _AnalyticsCode])
-_gaq.push(['_trackPageview'])
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', _AnalyticsCode]);
+_gaq.push(['_trackPageview']);
+
 
 let hashCode = function(word) {
   var hash = 0,
@@ -119,7 +120,6 @@ Array.prototype.slice
                           })
 
                           questionWrapper.appendChild(button)
-
                           _gaq.push(['_trackEvent', 'attempt', 'rightAnswer'])
                           right++
                         }
@@ -221,5 +221,5 @@ Array.prototype.slice
     })
   })
 
-_gaq.push(['_trackEvent', 'attempt', 'wrongCompleted:' + wrong])
-_gaq.push(['_trackEvent', 'attempt', 'rightCompleted:' + right])
+_gaq.push(['_trackEvent', 'attempt', 'wrongCompleted:'+wrong])
+_gaq.push(['_trackEvent', 'attempt', 'rightCompleted:'+right])
