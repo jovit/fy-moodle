@@ -165,7 +165,6 @@ if (document.getElementsByClassName('form-control') === []) {
       _gaq.push(['_trackEvent', 'scan', name+'-incorrect'])
     })
 } else {
-  console.log("dissertativa caralho")
   Array.prototype.slice
     .call(document.getElementsByClassName('questioncorrectnessicon'))
     .filter(e => {
@@ -218,58 +217,5 @@ if (document.getElementsByClassName('form-control') === []) {
 
       db.child(questionHash).set({answer: answer})
       _gaq.push(['_trackEvent', 'scan', name+'-dissertativa-correct'])
-    })
-
-  Array.prototype.slice
-    .call(document.getElementsByClassName('questioncorrectnessicon'))
-    .filter(e => {
-      return e.src.indexOf('incorrect') !== -1
-    })
-    .map(e => {
-      let answer = Array.prototype.slice
-        .call(e.parentNode.childNodes)
-        .filter(e => {
-          return e.nodeName === 'INPUT'
-        })
-        .map(e => {
-          if (e.nodeName === 'INPUT') {
-            return e.value
-          } else {
-            return e.innerHTML
-          }
-        })[0]
-
-      if (!typeof answer === 'string') {
-        answer = new XMLSerializer().serializeToString(answer)
-      }
-
-      let parent = e.parentNode
-
-      while (parent.className.indexOf('formulation') === -1) {
-        parent = parent.parentNode
-      }
-
-      let question = Array.prototype.slice
-        .call(parent.childNodes)
-        .filter(e => {
-          return e.nodeName === 'DIV'
-        })
-        .filter(div => {
-          return div.className === 'qtext'
-        })[0]
-
-      let questionText = new XMLSerializer().serializeToString(question)
-
-      const latexReg = /action_link(.*)"/
-
-      while (questionText.search(latexReg) !== -1) {
-        questionText = questionText.replace(latexReg, '')
-      }
-
-      let questionHash = hashCode(questionText)
-
-      let db = firebase.database().ref(`${name}/dissertativa/${questionHash}/incorrect`)
-      db.child(hashCode(answer)).set({answer: answer})
-      _gaq.push(['_trackEvent', 'scan', name+'-dissertativa-incorrect'])
     })
 }
