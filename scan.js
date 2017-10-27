@@ -19,136 +19,257 @@ let hashCode = function(word) {
   return hash
 }
 
+// var config = {
+//   apiKey: 'AIzaSyAXRiEgsWNrmRfPQ8KbXY-0PnZjsAm4INI',
+//   authDomain: 'fy-moodle.firebaseapp.com',
+//   databaseURL: 'https://fy-moodle.firebaseio.com',
+//   projectId: 'fy-moodle',
+//   storageBucket: 'fy-moodle.appspot.com',
+//   messagingSenderId: '944849265962'
+// }
 var config = {
-  apiKey: 'AIzaSyAXRiEgsWNrmRfPQ8KbXY-0PnZjsAm4INI',
-  authDomain: 'fy-moodle.firebaseapp.com',
-  databaseURL: 'https://fy-moodle.firebaseio.com',
-  projectId: 'fy-moodle',
-  storageBucket: 'fy-moodle.appspot.com',
-  messagingSenderId: '944849265962'
-}
+   apiKey: "AIzaSyCfI1g-1KfhfTXVikM2hY7ochuT0W-0naI",
+   authDomain: "fy-moodle-test-area.firebaseapp.com",
+   databaseURL: "https://fy-moodle-test-area.firebaseio.com",
+   projectId: "fy-moodle-test-area",
+   storageBucket: "fy-moodle-test-area.appspot.com",
+   messagingSenderId: "291524795540"
+ };
 firebase.initializeApp(config)
+
+
 
 let splitName = document
   .getElementsByClassName('page-header-headings')[0]
   .childNodes[0].innerHTML.split(' ')
 let name = splitName[0] + splitName[1]
 
-Array.prototype.slice
-  .call(document.getElementsByClassName('questioncorrectnessicon'))
-  .filter(e => {
-    return e.src.indexOf('incorrect') === -1
-  })
-  .map(e => {
-    let answer = Array.prototype.slice
-      .call(e.parentNode.childNodes)
-      .filter(e => {
-        return e.nodeName === 'LABEL' || e.nodeName === 'SPAN'
-      })
-      .map(e => {
-        if (e.nodeName === 'INPUT') {
-          return e.value
-        } else {
-          return e.innerHTML
-        }
-      })[0]
+//if is multiple choice
+if (document.getElementsByClassName('form-control') === []) {
+  Array.prototype.slice
+    .call(document.getElementsByClassName('questioncorrectnessicon'))
+    .filter(e => {
+      return e.src.indexOf('incorrect') === -1
+    })
+    .map(e => {
+      let answer = Array.prototype.slice
+        .call(e.parentNode.childNodes)
+        .filter(e => {
+          return e.nodeName === 'LABEL' || e.nodeName === 'SPAN'
+        })
+        .map(e => {
+          if (e.nodeName === 'INPUT') {
+            return e.value
+          } else {
+            return e.innerHTML
+          }
+        })[0]
 
-    if (!typeof answer === 'string') {
-      answer = new XMLSerializer().serializeToString(answer)
-    }
+      if (!typeof answer === 'string') {
+        answer = new XMLSerializer().serializeToString(answer)
+      }
 
-    let parent = e.parentNode
+      let parent = e.parentNode
 
-    while (parent.className.indexOf('formulation') === -1) {
-      parent = parent.parentNode
-    }
+      while (parent.className.indexOf('formulation') === -1) {
+        parent = parent.parentNode
+      }
 
-    let question = Array.prototype.slice
-      .call(parent.childNodes)
-      .filter(e => {
-        return e.nodeName === 'DIV'
-      })
-      .filter(div => {
-        return div.className === 'qtext'
-      })[0]
+      let question = Array.prototype.slice
+        .call(parent.childNodes)
+        .filter(e => {
+          return e.nodeName === 'DIV'
+        })
+        .filter(div => {
+          return div.className === 'qtext'
+        })[0]
 
-    let db = firebase.database().ref(`${name}/`)
-    answer = answer.replace('a. ', '')
-    answer = answer.replace('b. ', '')
-    answer = answer.replace('c. ', '')
-    answer = answer.replace('d. ', '')
-    answer = answer.replace('e. ', '')
-    answer = answer.replace('f. ', '')
+      let db = firebase.database().ref(`${name}/`)
+      answer = answer.replace('a. ', '')
+      answer = answer.replace('b. ', '')
+      answer = answer.replace('c. ', '')
+      answer = answer.replace('d. ', '')
+      answer = answer.replace('e. ', '')
+      answer = answer.replace('f. ', '')
 
-    question = new XMLSerializer().serializeToString(question)
+      question = new XMLSerializer().serializeToString(question)
 
-    const latexReg = /action_link(.*)"/
+      const latexReg = /action_link(.*)"/
 
-    while (question.search(latexReg) !== -1) {
-      question = question.replace(latexReg, '')
-    }
+      while (question.search(latexReg) !== -1) {
+        question = question.replace(latexReg, '')
+      }
 
-    let questionHash = hashCode(question)
+      let questionHash = hashCode(question)
 
-    db.child(questionHash).set({answer: answer})
-    _gaq.push(['_trackEvent', 'scan', name+'-correct'])
-  })
+      db.child(questionHash).set({answer: answer})
+      _gaq.push(['_trackEvent', 'scan', name+'-correct'])
+    })
 
-Array.prototype.slice
-  .call(document.getElementsByClassName('questioncorrectnessicon'))
-  .filter(e => {
-    return e.src.indexOf('incorrect') !== -1
-  })
-  .map(e => {
-    let answer = Array.prototype.slice
-      .call(e.parentNode.childNodes)
-      .filter(e => {
-        return e.nodeName === 'LABEL' || e.nodeName === 'SPAN'
-      })
-      .map(e => {
-        if (e.nodeName === 'INPUT') {
-          return e.value
-        } else {
-          return e.innerHTML
-        }
-      })[0]
+  Array.prototype.slice
+    .call(document.getElementsByClassName('questioncorrectnessicon'))
+    .filter(e => {
+      return e.src.indexOf('incorrect') !== -1
+    })
+    .map(e => {
+      let answer = Array.prototype.slice
+        .call(e.parentNode.childNodes)
+        .filter(e => {
+          return e.nodeName === 'LABEL' || e.nodeName === 'SPAN'
+        })
+        .map(e => {
+          if (e.nodeName === 'INPUT') {
+            return e.value
+          } else {
+            return e.innerHTML
+          }
+        })[0]
 
-    if (!typeof answer === 'string') {
-      answer = new XMLSerializer().serializeToString(answer)
-    }
+      if (!typeof answer === 'string') {
+        answer = new XMLSerializer().serializeToString(answer)
+      }
 
-    let parent = e.parentNode
+      let parent = e.parentNode
 
-    while (parent.className.indexOf('formulation') === -1) {
-      parent = parent.parentNode
-    }
+      while (parent.className.indexOf('formulation') === -1) {
+        parent = parent.parentNode
+      }
 
-    let question = Array.prototype.slice
-      .call(parent.childNodes)
-      .filter(e => {
-        return e.nodeName === 'DIV'
-      })
-      .filter(div => {
-        return div.className === 'qtext'
-      })[0]
+      let question = Array.prototype.slice
+        .call(parent.childNodes)
+        .filter(e => {
+          return e.nodeName === 'DIV'
+        })
+        .filter(div => {
+          return div.className === 'qtext'
+        })[0]
 
-    let questionText = new XMLSerializer().serializeToString(question)
+      let questionText = new XMLSerializer().serializeToString(question)
 
-    const latexReg = /action_link(.*)"/
+      const latexReg = /action_link(.*)"/
 
-    while (questionText.search(latexReg) !== -1) {
-      questionText = questionText.replace(latexReg, '')
-    }
+      while (questionText.search(latexReg) !== -1) {
+        questionText = questionText.replace(latexReg, '')
+      }
 
-    let questionHash = hashCode(questionText)
-    answer = answer.replace('a. ', '')
-    answer = answer.replace('b. ', '')
-    answer = answer.replace('c. ', '')
-    answer = answer.replace('d. ', '')
-    answer = answer.replace('e. ', '')
-    answer = answer.replace('f. ', '')
+      let questionHash = hashCode(questionText)
+      answer = answer.replace('a. ', '')
+      answer = answer.replace('b. ', '')
+      answer = answer.replace('c. ', '')
+      answer = answer.replace('d. ', '')
+      answer = answer.replace('e. ', '')
+      answer = answer.replace('f. ', '')
 
-    let db = firebase.database().ref(`${name}/${questionHash}/incorrect`)
-    db.child(hashCode(answer)).set({answer: answer})
-    _gaq.push(['_trackEvent', 'scan', name+'-incorrect'])
-  })
+      let db = firebase.database().ref(`${name}/${questionHash}/incorrect`)
+      db.child(hashCode(answer)).set({answer: answer})
+      _gaq.push(['_trackEvent', 'scan', name+'-incorrect'])
+    })
+} else {
+  console.log("dissertativa caralho")
+  Array.prototype.slice
+    .call(document.getElementsByClassName('questioncorrectnessicon'))
+    .filter(e => {
+      return e.src.indexOf('incorrect') === -1
+    })
+    .map(e => {
+      let answer = Array.prototype.slice
+        .call(e.parentNode.childNodes)
+        .filter(e => {
+          return e.nodeName === 'INPUT'
+        })
+        .map(e => {
+          if (e.nodeName === 'INPUT') {
+            return e.value
+          } else {
+            return e.innerHTML
+          }
+        })[0]
+
+      if (!typeof answer === 'string') {
+        answer = new XMLSerializer().serializeToString(answer)
+      }
+
+      let parent = e.parentNode
+
+      while (parent.className.indexOf('formulation') === -1) {
+        parent = parent.parentNode
+      }
+
+      let question = Array.prototype.slice
+        .call(parent.childNodes)
+        .filter(e => {
+          return e.nodeName === 'DIV'
+        })
+        .filter(div => {
+          return div.className === 'qtext'
+        })[0]
+
+      let db = firebase.database().ref(`${name}/dissertativa/`)
+
+      question = new XMLSerializer().serializeToString(question)
+
+      const latexReg = /action_link(.*)"/
+
+      while (question.search(latexReg) !== -1) {
+        question = question.replace(latexReg, '')
+      }
+
+      let questionHash = hashCode(question)
+
+      db.child(questionHash).set({answer: answer})
+      _gaq.push(['_trackEvent', 'scan', name+'-dissertativa-correct'])
+    })
+
+  Array.prototype.slice
+    .call(document.getElementsByClassName('questioncorrectnessicon'))
+    .filter(e => {
+      return e.src.indexOf('incorrect') !== -1
+    })
+    .map(e => {
+      let answer = Array.prototype.slice
+        .call(e.parentNode.childNodes)
+        .filter(e => {
+          return e.nodeName === 'INPUT'
+        })
+        .map(e => {
+          if (e.nodeName === 'INPUT') {
+            return e.value
+          } else {
+            return e.innerHTML
+          }
+        })[0]
+
+      if (!typeof answer === 'string') {
+        answer = new XMLSerializer().serializeToString(answer)
+      }
+
+      let parent = e.parentNode
+
+      while (parent.className.indexOf('formulation') === -1) {
+        parent = parent.parentNode
+      }
+
+      let question = Array.prototype.slice
+        .call(parent.childNodes)
+        .filter(e => {
+          return e.nodeName === 'DIV'
+        })
+        .filter(div => {
+          return div.className === 'qtext'
+        })[0]
+
+      let questionText = new XMLSerializer().serializeToString(question)
+
+      const latexReg = /action_link(.*)"/
+
+      while (questionText.search(latexReg) !== -1) {
+        questionText = questionText.replace(latexReg, '')
+      }
+
+      let questionHash = hashCode(questionText)
+
+      let db = firebase.database().ref(`${name}/dissertativa/${questionHash}/incorrect`)
+      db.child(hashCode(answer)).set({answer: answer})
+      _gaq.push(['_trackEvent', 'scan', name+'-dissertativa-incorrect'])
+    })
+}
