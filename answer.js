@@ -58,7 +58,7 @@ Array.prototype.slice
     let questionHash = hashCode(questionText)
 
 
-    if (document.getElementsByClassName('form-control') === []) {
+    if (document.getElementsByClassName('form-control').lenght === 0) {
       let db = firebase.database().ref(`${name}/${questionHash}/`)
 
       db.on('value', function(snapshot) {

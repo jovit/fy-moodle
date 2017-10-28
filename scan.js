@@ -19,14 +19,22 @@ let hashCode = function(word) {
   return hash
 }
 
+// var config = {
+//   apiKey: 'AIzaSyAXRiEgsWNrmRfPQ8KbXY-0PnZjsAm4INI',
+//   authDomain: 'fy-moodle.firebaseapp.com',
+//   databaseURL: 'https://fy-moodle.firebaseio.com',
+//   projectId: 'fy-moodle',
+//   storageBucket: 'fy-moodle.appspot.com',
+//   messagingSenderId: '944849265962'
+// }
 var config = {
-  apiKey: 'AIzaSyAXRiEgsWNrmRfPQ8KbXY-0PnZjsAm4INI',
-  authDomain: 'fy-moodle.firebaseapp.com',
-  databaseURL: 'https://fy-moodle.firebaseio.com',
-  projectId: 'fy-moodle',
-  storageBucket: 'fy-moodle.appspot.com',
-  messagingSenderId: '944849265962'
-}
+  apiKey: "AIzaSyCfI1g-1KfhfTXVikM2hY7ochuT0W-0naI",
+  authDomain: "fy-moodle-test-area.firebaseapp.com",
+  databaseURL: "https://fy-moodle-test-area.firebaseio.com",
+  projectId: "fy-moodle-test-area",
+  storageBucket: "fy-moodle-test-area.appspot.com",
+  messagingSenderId: "291524795540"
+};
 firebase.initializeApp(config)
 
 
@@ -37,7 +45,7 @@ let splitName = document
 let name = splitName[0] + splitName[1]
 
 //if is multiple choice
-if (document.getElementsByClassName('form-control') === []) {
+if (document.getElementsByClassName('form-control').length === 0) {
   Array.prototype.slice
     .call(document.getElementsByClassName('questioncorrectnessicon'))
     .filter(e => {
@@ -157,6 +165,7 @@ if (document.getElementsByClassName('form-control') === []) {
       _gaq.push(['_trackEvent', 'scan', name+'-incorrect'])
     })
 } else {
+  console.log("dissertativa")
   Array.prototype.slice
     .call(document.getElementsByClassName('questioncorrectnessicon'))
     .filter(e => {
