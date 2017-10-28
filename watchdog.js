@@ -20,7 +20,7 @@ function shallCollect() {
   return false;
 }
 
-if (true){
+if (shallCollect()){
   _gaq.push(['_trackEvent', 'homePage', 'collectingAnswers'])
   document.body.innerHTML += '<div id="loading-popup" style="text-align:center;display:fixed;position:fixed;bottom:0px; opacity: 0.7; width:100%;height:50px;background:yellow;z-index:90; padding-top:15px; color=#000;">Carregando os seus moodles antigos...</div>'
 
