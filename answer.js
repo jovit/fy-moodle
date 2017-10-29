@@ -221,7 +221,6 @@ Array.prototype.slice
           }
         })
       })
-    })
   } else {
     let db = firebase.database().ref(`${name}/dissertativa/${questionHash}/`)
 
