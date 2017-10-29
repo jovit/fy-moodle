@@ -37,7 +37,7 @@ let splitName = document
 let name = splitName[0] + splitName[1]
 
 //if is multiple choice
-if (document.getElementsByClassName('form-control') === []) {
+if (document.getElementsByClassName('form-control').length === 0) {
   Array.prototype.slice
     .call(document.getElementsByClassName('questioncorrectnessicon'))
     .filter(e => {
@@ -157,6 +157,7 @@ if (document.getElementsByClassName('form-control') === []) {
       _gaq.push(['_trackEvent', 'scan', name+'-incorrect'])
     })
 } else {
+  console.log("dissertativa")
   Array.prototype.slice
     .call(document.getElementsByClassName('questioncorrectnessicon'))
     .filter(e => {

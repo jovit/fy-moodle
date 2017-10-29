@@ -34,12 +34,12 @@ let splitName = document
 let name = splitName[0] + splitName[1]
 
 _gaq.push(['_trackEvent', 'attempt', name])
-let right = 0
-let wrong = 0
+var right = 0
+var wrong = 0
 
 Array.prototype.slice
   .call(document.getElementsByClassName('formulation'))
-  .forEach(e => {
+  .forEach( e => {
     let question = Array.prototype.slice
       .call(e.childNodes)
       .filter(e => e.nodeName === 'DIV')
@@ -57,85 +57,12 @@ Array.prototype.slice
 
     let questionHash = hashCode(questionText)
 
-    let db = firebase.database().ref(`${name}/${questionHash}/`)
 
-    db.on('value', function(snapshot) {
-      if (snapshot.val()) {
-        Array.prototype.slice
-          .call(question.parentNode.childNodes)
-          .filter(e => {
-            return e.className === 'ablock'
-          })
-          .forEach(e =>
-            Array.prototype.slice
-              .call(e.childNodes)
-              .filter(e => {
-                return e.className === 'answer'
-              })
-              .forEach(e => {
-                const questionWrapper = e
-                Array.prototype.slice.call(e.childNodes).map(e =>
-                  Array.prototype.slice
-                    .call(e.childNodes)
-                    .filter(e => {
-                      return e.nodeName === 'LABEL' || e.nodeName === 'SPAN'
-                    })
-                    .filter(e => {
-                      let answer = e.innerHTML
-                      if (!typeof answer === 'string') {
-                        answer = new XMLSerializer().serializeToString(answer)
-                      }
+    if (document.getElementsByClassName('form-control').length === 0) {
+      let db = firebase.database().ref(`${name}/${questionHash}/`)
 
-                      answer = answer.replace('a. ', '')
-                      answer = answer.replace('b. ', '')
-                      answer = answer.replace('c. ', '')
-                      answer = answer.replace('d. ', '')
-                      answer = answer.replace('e. ', '')
-                      answer = answer.replace('f. ', '')
-
-                      const latexReg = /action_link(.*)"/
-
-                      while (answer.search(latexReg) !== -1) {
-                        answer = answer.replace(latexReg, '')
-                      }
-
-                      let expectedAnswer = snapshot.val().answer
-                      while (expectedAnswer.search(latexReg) !== -1) {
-                        expectedAnswer = expectedAnswer.replace(latexReg, '')
-                      }
-
-                      if (answer === expectedAnswer) {
-                        let input = Array.prototype.slice
-                          .call(e.parentNode.childNodes)
-                          .filter(e => {
-                            return e.nodeName === 'INPUT'
-                          })[0]
-
-                        if (input.type === 'radio') {
-                          let button = document.createElement('input')
-                          button.type = 'button'
-                          button.value = 'Clique para mostrar a resposta certa'
-                          button.addEventListener('click', () => {
-                            e.style.background = '#62fc65' // light green
-                          })
-
-                          questionWrapper.appendChild(button)
-                          _gaq.push(['_trackEvent', 'attempt', 'rightAnswer'])
-                          right++
-                        }
-                      }
-                    })
-                )
-              })
-          )
-      }
-    })
-
-    db = firebase.database().ref(`${name}/${questionHash}/incorrect`)
-
-    db.on('value', function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        if (childSnapshot.val()) {
+      db.on('value', function(snapshot) {
+        if (snapshot.val()) {
           Array.prototype.slice
             .call(question.parentNode.childNodes)
             .filter(e => {
@@ -174,7 +101,7 @@ Array.prototype.slice
                           answer = answer.replace(latexReg, '')
                         }
 
-                        let expectedAnswer = childSnapshot.val().answer
+                        let expectedAnswer = snapshot.val().answer
                         while (expectedAnswer.search(latexReg) !== -1) {
                           expectedAnswer = expectedAnswer.replace(latexReg, '')
                         }
@@ -187,29 +114,16 @@ Array.prototype.slice
                             })[0]
 
                           if (input.type === 'radio') {
-                            const previousButton = questionWrapper.getElementsByClassName(
-                              'show-wrong'
-                            )[0]
-                            console.log(previousButton)
-                            if (previousButton) {
-                              console.log('previous')
-                              previousButton.addEventListener('click', () => {
-                                e.style.background = '#ff7066' // light red
-                              })
-                            } else {
-                              let button = document.createElement('input')
-                              button.className = 'show-wrong'
-                              button.type = 'button'
-                              button.style.background = '#ff7066' // light red
-                              button.value =
-                                'Clique para mostrar as respostas erradas'
-                              button.addEventListener('click', () => {
-                                e.style.background = '#ff7066' // light red
-                              })
-                              questionWrapper.appendChild(button)
-                            }
-                            _gaq.push(['_trackEvent', 'attempt', 'wrongAnswer'])
-                            wrong++
+                            let button = document.createElement('input')
+                            button.type = 'button'
+                            button.value = 'Clique para mostrar a resposta certa'
+                            button.addEventListener('click', () => {
+                              e.style.background = '#62fc65' // light green
+                            })
+
+                            questionWrapper.appendChild(button)
+                            _gaq.push(['_trackEvent', 'attempt', 'rightAnswer'])
+                            right++
                           }
                         }
                       })
@@ -218,8 +132,142 @@ Array.prototype.slice
             )
         }
       })
+
+      db = firebase.database().ref(`${name}/${questionHash}/incorrect`)
+
+      db.on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          if (childSnapshot.val()) {
+            Array.prototype.slice
+              .call(question.parentNode.childNodes)
+              .filter(e => {
+                return e.className === 'ablock'
+              })
+              .forEach(e =>
+                Array.prototype.slice
+                  .call(e.childNodes)
+                  .filter(e => {
+                    return e.className === 'answer'
+                  })
+                  .forEach(e => {
+                    const questionWrapper = e
+                    Array.prototype.slice.call(e.childNodes).map(e =>
+                      Array.prototype.slice
+                        .call(e.childNodes)
+                        .filter(e => {
+                          return e.nodeName === 'LABEL' || e.nodeName === 'SPAN'
+                        })
+                        .filter(e => {
+                          let answer = e.innerHTML
+                          if (!typeof answer === 'string') {
+                            answer = new XMLSerializer().serializeToString(answer)
+                          }
+
+                          answer = answer.replace('a. ', '')
+                          answer = answer.replace('b. ', '')
+                          answer = answer.replace('c. ', '')
+                          answer = answer.replace('d. ', '')
+                          answer = answer.replace('e. ', '')
+                          answer = answer.replace('f. ', '')
+
+                          const latexReg = /action_link(.*)"/
+
+                          while (answer.search(latexReg) !== -1) {
+                            answer = answer.replace(latexReg, '')
+                          }
+
+                          let expectedAnswer = childSnapshot.val().answer
+                          while (expectedAnswer.search(latexReg) !== -1) {
+                            expectedAnswer = expectedAnswer.replace(latexReg, '')
+                          }
+
+                          if (answer === expectedAnswer) {
+                            let input = Array.prototype.slice
+                              .call(e.parentNode.childNodes)
+                              .filter(e => {
+                                return e.nodeName === 'INPUT'
+                              })[0]
+
+                            if (input.type === 'radio') {
+                              const previousButton = questionWrapper.getElementsByClassName(
+                                'show-wrong'
+                              )[0]
+                              console.log(previousButton)
+                              if (previousButton) {
+                                console.log('previous')
+                                previousButton.addEventListener('click', () => {
+                                  e.style.background = '#ff7066' // light red
+                                })
+                              } else {
+                                let button = document.createElement('input')
+                                button.className = 'show-wrong'
+                                button.type = 'button'
+                                button.style.background = '#ff7066' // light red
+                                button.value =
+                                  'Clique para mostrar as respostas erradas'
+                                button.addEventListener('click', () => {
+                                  e.style.background = '#ff7066' // light red
+                                })
+                                questionWrapper.appendChild(button)
+                              }
+                              _gaq.push(['_trackEvent', 'attempt', 'wrongAnswer'])
+                              wrong++
+                            }
+                          }
+                        })
+                    )
+                  })
+              )
+          }
+        })
+      })
+  } else {
+    let db = firebase.database().ref(`${name}/dissertativa/${questionHash}/`)
+
+    db.on('value', function(snapshot) {
+      if (snapshot.val()) {
+        Array.prototype.slice
+          .call(question.parentNode.childNodes)
+          .filter(e => {
+            return e.className === 'ablock'
+          })
+          .forEach(e =>
+            Array.prototype.slice
+              .call(e.childNodes)
+              .filter(e => {
+                return e.className === 'answer'
+              })
+              .forEach(e => {
+                const questionWrapper = e
+                Array.prototype.slice.call(e.childNodes).map(e =>
+                  Array.prototype.slice
+                    .call(e.childNodes)
+                    .filter(e => {
+                      return e.nodeName === 'INPUT'
+                    })
+                    .filter(e => {
+                      let expectedAnswer = snapshot.val().answer
+
+                      if (input.type === 'text') {
+                        let button = document.createElement('input')
+                        button.type = 'button'
+                        button.value = 'Clique para mostrar a resposta certa'
+                        button.addEventListener('click', () => {
+                          e.value = expectedAnswer
+                        })
+
+                        questionWrapper.appendChild(button)
+                        _gaq.push(['_trackEvent', 'attempt', 'rightAnswer'])
+                        right++
+                      }
+                    })
+                )
+              })
+          )
+      }
     })
-  })
+  }
+})
 
 _gaq.push(['_trackEvent', 'attempt', 'wrongCompleted:'+wrong])
 _gaq.push(['_trackEvent', 'attempt', 'rightCompleted:'+right])
