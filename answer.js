@@ -39,7 +39,7 @@ var wrong = 0
 
 Array.prototype.slice
   .call(document.getElementsByClassName('formulation'))
-  .forEach(e => {
+  .forEach( e => {
     let question = Array.prototype.slice
       .call(e.childNodes)
       .filter(e => e.nodeName === 'DIV')
@@ -267,6 +267,7 @@ Array.prototype.slice
       }
     })
   }
+})
 
 _gaq.push(['_trackEvent', 'attempt', 'wrongCompleted:'+wrong])
 _gaq.push(['_trackEvent', 'attempt', 'rightCompleted:'+right])
