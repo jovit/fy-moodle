@@ -266,7 +266,6 @@ Array.prototype.slice
           )
       }
     })
-  })
   }
 
 _gaq.push(['_trackEvent', 'attempt', 'wrongCompleted:'+wrong])
