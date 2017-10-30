@@ -56,6 +56,7 @@
     }
 
     // extractors
+    // e must be a first-level child of the answer node
     const extractAnswerNode = (e) => {
         let answer = e.parentNode.firstChild
         if (answer.nodeName === 'INPUT' && answer.type === 'radio') {
@@ -64,6 +65,7 @@
         return answer
     }
 
+    // e must be a first-level child of the answer node
     const extractAnswer = (e) => {
         let answer = extractAnswerNode(e)
         if (answer.nodeName === 'INPUT') {
@@ -80,6 +82,7 @@
         return answer || ""
     }
 
+    // e must be a child of a .formulation node
     const extractQuestionNode = (e) => {
         let parent = e.parentNode
         while (!parent.classList.contains('formulation')) {
@@ -93,6 +96,7 @@
         return question
     }
 
+    // e must be a child of a .formulation node
     const extractQuestion = (e) => {
         let question = extractQuestionNode(e)
         if (question instanceof Node) {
