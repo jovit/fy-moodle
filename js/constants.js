@@ -1,6 +1,20 @@
-;((root) => {
+;(root => {
+    const config = {
+        firebase: {
+            apiKey: 'AIzaSyAXRiEgsWNrmRfPQ8KbXY-0PnZjsAm4INI',
+            authDomain: 'fy-moodle.firebaseapp.com',
+            databaseURL: 'https://fy-moodle.firebaseio.com',
+            projectId: 'fy-moodle',
+            storageBucket: 'fy-moodle.appspot.com',
+            messagingSenderId: '944849265962'
+        },
+        gaCode: 'UA-107698779-1'
+    }
+
+    root.database = firebase.initializeApp(config.firebase) || {}
+
     // Analytics
-    let _AnalyticsCode = 'UA-108868065-1'
+    let _AnalyticsCode = config.gaCode
     root._gaq = _gaq || []
     root._gaq.push(['_setAccount', _AnalyticsCode]);
 

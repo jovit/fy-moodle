@@ -1,24 +1,22 @@
-;
-(root => {
+;(root => {
     root._gaq.push(['_trackPageview'])
     root._gaq.push(['_trackEvent', 'homePage', 'entered'])
 
     function shallCollect() {
-        // if (localStorage.hasOwnProperty('lastCollection')) {
-        //     if (
-        //         Date.now() - parseInt(localStorage.lastCollection) >
-        //         600000000
-        //     ) {
-        //         localStorage.setItem('lastCollection', Date.now().toString())
-        //         return true
-        //     }
-        //     return false
-        // } else {
-        //     localStorage.setItem('lastCollection', Date.now().toString())
-        //     return true
-        // }
-        // return false
-        return true
+        if (localStorage.hasOwnProperty('lastCollection')) {
+            if (
+                Date.now() - parseInt(localStorage.lastCollection) >
+                600000000
+            ) {
+                localStorage.setItem('lastCollection', Date.now().toString())
+                return true
+            }
+            return false
+        } else {
+            localStorage.setItem('lastCollection', Date.now().toString())
+            return true
+        }
+        return false
     }
 
     if (shallCollect()) {

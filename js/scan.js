@@ -30,7 +30,7 @@
             let answerHash = root.hashCode(answer)
 
             let db = root.database.database().ref(`${name}/${questionHash}/incorrect`)
-            db.child(root.hashCode(answer)).set({answer})
+            db.child(answerHash).set({answer})
             root._gaq.push(['_trackEvent', 'scan', name + '-incorrect'])
         })
     } else {

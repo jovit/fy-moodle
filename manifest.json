@@ -11,7 +11,7 @@
     },
     "permissions": ["webNavigation", "storage", "alarms", "*://*.ggte.unicamp.br/eam/*"],
     "background": {
-        "scripts": ["js/ga.js", "js/firebase.js", "js/axios.min.js", "js/configuration.js", "js/constants.js", "js/collector.js"],
+        "scripts": ["js/ga.js", "js/firebase.js", "js/axios.min.js", "js/constants.js", "js/collector.js"],
         "persistent": false
     },
     "browser_action": {
@@ -21,13 +21,13 @@
     },
     "content_scripts": [{
             "matches": ["*://www.ggte.unicamp.br/eam/*"],
-            "js": ["js/ga.js", "js/firebase.js", "js/configuration.js", "js/constants.js"],
+            "js": ["js/ga.js", "js/firebase.js", "js/constants.js"],
             "run_at": "document_end",
             "all_frames": true
         },
         {
             "matches": ["*://www.ggte.unicamp.br/eam/my/*"],
-            "js": ["js/test.js", "js/watchdog.js"],
+            "js": ["js/watchdog.js"],
             "run_at": "document_end",
             "all_frames": true
         },
@@ -43,6 +43,5 @@
             "run_at": "document_end",
             "all_frames": true
         }
-    ],
-    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com https://www.gstatic.com/ https://*.firebaseio.com https://www.googleapis.com https://unpkg.com; object-src 'self'"
+    ]
 }
