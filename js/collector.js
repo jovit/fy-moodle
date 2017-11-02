@@ -88,6 +88,7 @@
                                                                         let answer = root.extract.answer(e)
                                                                         answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
                                                                         let question = root.extract.question(e)
+                                                                        question = question.replace(root.REGEX_ACTION_LINK, '')
                                                                         let questionHash = root.hashCode(question)
 
                                                                         let db = root.database.database().ref(`${name}/dissertativa/`)

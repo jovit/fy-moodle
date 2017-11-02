@@ -40,6 +40,7 @@
                                 .forEach(e => {
                                     let answer = root.extract.node.answer(e.firstElementChild)
                                     let answerText = root.extract.answer(e.firstElementChild)
+                                    answerText = answerText.replace(root.REGEX_ANSWER_OPTION, '')
 
                                     let input = Array.from(answer.parentNode.childNodes)
                                         .filter(e => e.nodeName === 'INPUT')[0]

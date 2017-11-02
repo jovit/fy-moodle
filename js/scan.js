@@ -14,6 +14,7 @@
             let answer = root.extract.answer(e)
             answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
             let question = root.extract.question(e)
+            question = question.replace(root.REGEX_ACTION_LINK, '')
             let questionHash = root.hashCode(question)
             let answerHash = root.hashCode(answer)
 
@@ -41,6 +42,7 @@
                 let answer = root.extract.answer(e)
                 answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
                 let question = root.extract.question(e)
+                question = question.replace(root.REGEX_ACTION_LINK, '')
                 let questionHash = root.hashCode(question)
 
                 let db = firebase.database().ref(`${name}/dissertativa/`)
