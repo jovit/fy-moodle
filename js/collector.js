@@ -49,9 +49,10 @@
                                                                             let question = root.extract.node.question(e)
                                                                             let questionText = root.extract.question(e).replace(root.REGEX_ACTION_LINK, '')
                                                                             let questionHash = root.hashCode(questionText)
+                                                                            let answerHash = root.hashCode(answer)
 
-                                                                            let db = root.database.database().ref(`${name}/`)
-                                                                            db.child(questionHash).set({ answer })
+                                                                            let db = root.database.database().ref(`${name}/${questionHash}/correct`)
+                                                                            db.child(answerHash).set({ answer })
 
                                                                             root._gaq.push(['_trackEvent', 'collecting', name + '-correct'])
                                                                         } catch (er) {

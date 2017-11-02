@@ -15,13 +15,13 @@
             let db = root.database.database().ref(`${name}/${questionHash}/`)
             db.on('value', function(snapshot) {
                 if (snapshot.val()) {
-                    let expectedAnswer = snapshot.val().answer
+                    let expectedAnswers = snapshot.val().correct
                     let incorrectAnswers = snapshot.val().incorrect
 
-                    if (expectedAnswer) {
-                        expectedAnswer = expectedAnswer.replace(root.REGEX_ANSWER_OPTION, '')
+                    if (!expectedAnswers) {
+                        expectedAnswers = []
                     } else {
-                        expectedAnswer = ""
+                        expectedAnswers = Object.keys(expectedAnswers).map(key => expectedAnswers[key].answer)
                     }
 
                     if (!incorrectAnswers) {
@@ -44,7 +44,7 @@
                                     let input = Array.from(answer.parentNode.childNodes)
                                         .filter(e => e.nodeName === 'INPUT')[0]
 
-                                    if (answerText === expectedAnswer) {
+                                    if (expectedAnswers.includes(answerText)) {
                                         let button = document.createElement('input')
                                         button.type = 'button'
                                         button.value = 'Clique para mostrar a resposta certa'
@@ -81,7 +81,7 @@
                                                 button.value = 'Clique para mostrar a resposta certa'
                                                 button.addEventListener('click', () => {
                                                     let span = document.createElement('span')
-                                                    span.innerHTML = expectedAnswer
+                                                    span.innerHTML = xpctdnswr
                                                     span.setAttribute('style', `background: ${root.colours.correct}`)
                                                     input.parentElement.appendChild(span)
                                                 })

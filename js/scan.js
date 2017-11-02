@@ -15,9 +15,10 @@
             answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
             let question = root.extract.question(e)
             let questionHash = root.hashCode(question)
+            let answerHash = root.hashCode(answer)
 
-            let db = root.database.database().ref(`${name}/`)
-            db.child(questionHash).set({ answer })
+            let db = root.database.database().ref(`${name}/${questionHash}/correct`)
+            db.child(answerHash).set({ answer })
             root._gaq.push(['_trackEvent', 'scan', name + '-correct'])
         })
 
@@ -33,6 +34,7 @@
             db.child(answerHash).set({answer})
             root._gaq.push(['_trackEvent', 'scan', name + '-incorrect'])
         })
+
     } else {
         moodles.filter(e => e.src.indexOf('incorrect') === -1)
             .forEach(e => {
