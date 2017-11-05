@@ -47,11 +47,15 @@
                                                                             let answer = root.extract.answer(e)
                                                                             answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
                                                                             let question = root.extract.node.question(e)
-                                                                            let questionText = root.extract.question(e).replace(root.REGEX_ACTION_LINK, '')
-                                                                            let questionHash = root.hashCode(questionText)
+                                                                            let questionText = root.extract.question(e)
+                                                                            let questionTextClean = questionText.replace(root.REGEX_ACTION_LINK, '')
+                                                                            let questionHash = root.hashCode(questionTextClean)
+                                                                            let answerHash = root.hashCode(answer)
 
-                                                                            let db = root.database.database().ref(`${name}/`)
-                                                                            db.child(questionHash).set({ answer })
+                                                                            let updates = {}
+                                                                            updates[`${name}/${questionHash}/correct/${answerHash}`] = answer
+                                                                            updates[`${name}/${questionHash}/question`] = questionText
+                                                                            root.database.database().ref().update(updates)
 
                                                                             root._gaq.push(['_trackEvent', 'collecting', name + '-correct'])
                                                                         } catch (er) {
@@ -68,12 +72,14 @@
                                                                             let answer = root.extract.answer(e)
                                                                             answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
                                                                             let question = root.extract.question(e)
-                                                                            question = question.replace(root.REGEX_ACTION_LINK, '')
-                                                                            let questionHash = root.hashCode(question)
+                                                                            let questionClean = questionText.replace(root.REGEX_ACTION_LINK, '')
+                                                                            let questionHash = root.hashCode(questionClean)
                                                                             let answerHash = root.hashCode(answer)
 
-                                                                            let db = root.database.database().ref(`${name}/${questionHash}/incorrect`)
-                                                                            db.child(answerHash).set({ answer })
+                                                                            let updates = {}
+                                                                            updates[`${name}/${questionHash}/incorrect/${answerHash}`] = answer
+                                                                            updates[`${name}/${questionHash}/question`] = question
+                                                                            root.database.database().ref().update(updates)
 
                                                                             root._gaq.push(['_trackEvent', 'scan', name + '-incorrect'])
                                                                         } catch (er) {
@@ -87,10 +93,13 @@
                                                                         let answer = root.extract.answer(e)
                                                                         answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
                                                                         let question = root.extract.question(e)
-                                                                        let questionHash = root.hashCode(question)
+                                                                        let questionClean = questionText.replace(root.REGEX_ACTION_LINK, '')
+                                                                        let questionHash = root.hashCode(questionClean)
 
-                                                                        let db = root.database.database().ref(`${name}/dissertativa/`)
-                                                                        db.child(questionHash).set({ answer })
+                                                                        let updates = {}
+                                                                        updates[`${name}/dissertativa/${questionHash}/answer`] = answer
+                                                                        updates[`${name}/dissertativa/${questionHash}/question`] = question
+                                                                        root.database.database().ref().update(updates)
 
                                                                         root._gaq.push(['_trackEvent', 'scan', name + '-dissertativa-correct'])
                                                                     })

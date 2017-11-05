@@ -14,10 +14,14 @@
             let answer = root.extract.answer(e)
             answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
             let question = root.extract.question(e)
-            let questionHash = root.hashCode(question)
+            let questionCleaned = question.replace(root.REGEX_ACTION_LINK, '')
+            let questionHash = root.hashCode(questionCleaned)
+            let answerHash = root.hashCode(answer)
 
-            let db = root.database.database().ref(`${name}/`)
-            db.child(questionHash).set({ answer })
+            let updates = {}
+            updates[`${name}/${questionHash}/correct/${answerHash}`] = answer
+            updates[`${name}/${questionHash}/question`] = question
+            root.database.database().ref().update(updates)
             root._gaq.push(['_trackEvent', 'scan', name + '-correct'])
         })
 
@@ -25,24 +29,30 @@
             let answer = root.extract.answer(e)
             answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
             let question = root.extract.question(e)
-            question = question.replace(root.REGEX_ACTION_LINK, '')
-            let questionHash = root.hashCode(question)
+            let questionCleaned = question.replace(root.REGEX_ACTION_LINK, '')
+            let questionHash = root.hashCode(questionCleaned)
             let answerHash = root.hashCode(answer)
 
-            let db = root.database.database().ref(`${name}/${questionHash}/incorrect`)
-            db.child(answerHash).set({answer})
+            let updates = {}
+            updates[`${name}/${questionHash}/incorrect/${answerHash}`] = answer
+            updates[`${name}/${questionHash}/question`] = question
+            root.database.database().ref().update(updates)
             root._gaq.push(['_trackEvent', 'scan', name + '-incorrect'])
         })
+
     } else {
         moodles.filter(e => e.src.indexOf('incorrect') === -1)
             .forEach(e => {
                 let answer = root.extract.answer(e)
                 answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
                 let question = root.extract.question(e)
-                let questionHash = root.hashCode(question)
+                let questionCleaned = question.replace(root.REGEX_ACTION_LINK, '')
+                let questionHash = root.hashCode(questionCleaned)
 
-                let db = firebase.database().ref(`${name}/dissertativa/`)
-                db.child(questionHash).set({ answer })
+                let updates = {}
+                updates[`${name}/dissertativa/${questionHash}/answer`] = answer
+                updates[`${name}/dissertativa/${questionHash}/question`] = question
+                root.database.database().ref().update(updates)
                 root._gaq.push(['_trackEvent', 'scan', name + '-dissertativa-correct'])
             })
     }
