@@ -53,7 +53,7 @@
                                                                             let answerHash = root.hashCode(answer)
 
                                                                             let updates = {}
-                                                                            updates[`${name}/${questionHash}/correct/${answerHash}`] = answer
+                                                                            updates[`${name}/${questionHash}/correct/${answerHash}/answer`] = answer
                                                                             updates[`${name}/${questionHash}/question`] = questionText
                                                                             root.database.database().ref().update(updates)
 
@@ -77,7 +77,7 @@
                                                                             let answerHash = root.hashCode(answer)
 
                                                                             let updates = {}
-                                                                            updates[`${name}/${questionHash}/incorrect/${answerHash}`] = answer
+                                                                            updates[`${name}/${questionHash}/incorrect/${answerHash}/answer`] = answer
                                                                             updates[`${name}/${questionHash}/question`] = question
                                                                             root.database.database().ref().update(updates)
 
