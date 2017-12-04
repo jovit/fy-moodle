@@ -46,13 +46,18 @@
                                         .filter(e => e.nodeName === 'INPUT')[0]
 
                                     if (expectedAnswers.includes(answerText)) {
-                                        let button = document.createElement('input')
-                                        button.type = 'button'
-                                        button.value = 'Clique para mostrar a resposta certa'
+                                        let button = question.parentNode.querySelector('.show-right')
+                                        if (!button) {
+                                            let button = document.createElement('input')
+                                            button.className = 'show-right'
+                                            button.type = 'button'
+                                            button.value = 'Clique para mostrar a resposta certa'
+                                            question.parentNode.appendChild(button)
+                                        }
+                                        
                                         button.addEventListener('click', () => {
                                             answer.setAttribute('style', `background: ${root.colours.correct}`)
                                         })
-                                        question.parentNode.appendChild(button)
                                         root._gaq.push(['_trackEvent', 'attempt', 'rightAnswer'])
                                         right++
                                     } else if (incorrectAnswers.includes(answerText)) {
