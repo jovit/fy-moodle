@@ -10,9 +10,22 @@
         .forEach(e => {
             let question = root.extract.node.question(e)
             let questionTextOldFilter = root.extract.question(e).replace(root.REGEX_ACTION_LINK, '')
+            let questionHashOldFilter = root.hashCode(questionTextOldFilter)
             let questionText = root.filterLinks(question)
             let questionHash = root.hashCode(questionText)
 
+            // if there's an answer in the old format, put it in the new format and delete it
+            let db = root.database.database().ref(`${name}/${questionHashOldFilter}/`)
+            db.once('value', function(snapshot) {
+                if (snapshot.val()) {
+                    let updates = {}
+                    updates[`${name}/${questionHash}/`] = snapshot.val()
+                    updates[`${name}/${questionHashOldFilter}/`] = null
+                    root.database.database().ref().update(updates)
+                    root._gaq.push(['_trackEvent', 'answer', name + '-porting-answer'])
+                } 
+            })
+            
             let db = root.database.database().ref(`${name}/${questionHash}/`)
             db.on('value', function(snapshot) {
                 if (snapshot.val()) {
