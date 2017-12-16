@@ -26,7 +26,7 @@
                 } 
             })
             
-            let db = root.database.database().ref(`${name}/${questionHash}/`)
+            db = root.database.database().ref(`${name}/${questionHash}/`)
             db.on('value', function(snapshot) {
                 if (snapshot.val()) {
                     let expectedAnswers = snapshot.val().correct
