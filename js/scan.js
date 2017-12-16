@@ -14,7 +14,7 @@
             let answer = root.extract.answer(e)
             answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
             let question = root.extract.question(e)
-            let questionCleaned = question.replace(root.REGEX_ACTION_LINK, '')
+            let questionCleaned = root.filterLinks(question)
             let questionHash = root.hashCode(questionCleaned)
             let answerHash = root.hashCode(answer)
 
@@ -29,7 +29,7 @@
             let answer = root.extract.answer(e)
             answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
             let question = root.extract.question(e)
-            let questionCleaned = question.replace(root.REGEX_ACTION_LINK, '')
+            let questionCleaned = root.filterLinks(question)
             let questionHash = root.hashCode(questionCleaned)
             let answerHash = root.hashCode(answer)
 
@@ -46,7 +46,7 @@
                 let answer = root.extract.answer(e)
                 answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
                 let question = root.extract.question(e)
-                let questionCleaned = question.replace(root.REGEX_ACTION_LINK, '')
+                let questionCleaned = root.filterLinks(question)
                 let questionHash = root.hashCode(questionCleaned)
 
                 let updates = {}

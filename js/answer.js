@@ -9,7 +9,8 @@
         .call(document.querySelectorAll('.qtext'))
         .forEach(e => {
             let question = root.extract.node.question(e)
-            let questionText = root.extract.question(e).replace(root.REGEX_ACTION_LINK, '')
+            let questionTextOldFilter = root.extract.question(e).replace(root.REGEX_ACTION_LINK, '')
+            let questionText = root.filterLinks(question)
             let questionHash = root.hashCode(questionText)
 
             let db = root.database.database().ref(`${name}/${questionHash}/`)

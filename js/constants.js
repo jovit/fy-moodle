@@ -41,6 +41,17 @@
         correct: 'rgba(98, 252, 101, .9)',
         incorrect: 'rgba(255, 112, 102, .9)'
     }
+    
+    // filter links from string
+    root.filterLinks = string => {
+        let parts = string.split('src="http')
+        let result = parts[0]
+        parts.forEach(part => {
+            let index = part.indexOf('"')
+            let newLink = part.slice(0,index).split('/').pop()
+            result += 'src="' + newLink + part.slice(index)
+        })
+    }
 
     // hash
     root.hashCode = word => {
