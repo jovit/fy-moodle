@@ -21,6 +21,8 @@
     // Regex
     root.REGEX_ANSWER_OPTION = /^[a-z]\. /
     root.REGEX_ACTION_LINK = /action_link(.*)"/g
+    root.REGEX_KEEP_URL_PATH_ONLY = /https?:\/\/(?:[^\/\s]+\/)+([^"]*)/g
+    root.REGEX_QUESTIONTEXT_LINK = /questiontext\/[0-9]*\/[0-9]*\/[0-9]*\//g
     root.COLLECTABLE_BUZZWORDS = /(teste|question(a|á)rio|pr(é|e)\-aula)/gi
     const FORMULATION_NODE_NAMES = ['DIV']
     const ANSWER_NODE_NAMES = ['LABEL', 'SPAN', '#text']
@@ -40,6 +42,21 @@
     root.colours = {
         correct: 'rgba(98, 252, 101, .9)',
         incorrect: 'rgba(255, 112, 102, .9)'
+    }
+    
+    // filter links from string
+    root.filterLinks = string => {
+        let filteredText = (string || "").replace(root.REGEX_ACTION_LINK, '').replace(root.REGEX_KEEP_URL_PATH_ONLY, '$1')
+        return filteredText
+    }
+
+    root.filterLinksFromNode = node => {
+        let string = node.outerHTML
+        let filteredText = root.filterLinks(string)
+        let element = document.createElement('TEMPLATE')
+        element.innerHTML = filteredText
+        let elementString = new XMLSerializer().serializeToString(element.content.firstChild)
+        return elementString
     }
 
     // hash
