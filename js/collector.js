@@ -47,7 +47,7 @@
                                                                         answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
                                                                         let question = root.extract.node.question(e)
                                                                         let questionText = root.extract.question(e)
-                                                                        let questionTextClean = root.filterLinks(question)
+                                                                        let questionTextClean = root.filterLinksFromNode(question)
                                                                         let questionHash = root.hashCode(questionTextClean)
                                                                         let answerHash = root.hashCode(answer)
 
@@ -70,8 +70,9 @@
                                                                     try {
                                                                         let answer = root.extract.answer(e)
                                                                         answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
+                                                                        let questionNode = root.extract.node.question(e)
                                                                         let question = root.extract.question(e)
-                                                                        let questionClean = root.filterLinks(question)
+                                                                        let questionClean = root.filterLinksFromNode(questionNode)
                                                                         let questionHash = root.hashCode(questionClean)
                                                                         let answerHash = root.hashCode(answer)
 
@@ -91,8 +92,9 @@
                                                                 .map(e => {
                                                                     let answer = root.extract.answer(e)
                                                                     answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
+                                                                    let questionNode = root.extract.node.question(e)
                                                                     let question = root.extract.question(e)
-                                                                    let questionClean = root.filterLinks(question)
+                                                                    let questionClean = root.filterLinksFromNode(questionNode)
                                                                     let questionHash = root.hashCode(questionClean)
 
                                                                     let updates = {}

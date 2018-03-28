@@ -11,7 +11,7 @@
             let question = root.extract.node.question(e)
             let questionTextOldFilter = root.extract.question(e).replace(root.REGEX_ACTION_LINK, '')
             let questionHashOldFilter = root.hashCode(questionTextOldFilter)
-            let questionText = root.filterLinks(question)
+            let questionText = root.filterLinksFromNode(question)
             let questionHash = root.hashCode(questionText)
 
             // if there's an answer in the old format, put it in the new format and delete it
@@ -62,7 +62,7 @@
                                     if (expectedAnswers.includes(answerText)) {
                                         let button = question.parentNode.querySelector('.show-right')
                                         if (!button) {
-                                            let button = document.createElement('input')
+                                            button = document.createElement('input')
                                             button.className = 'show-right'
                                             button.type = 'button'
                                             button.value = 'Clique para mostrar a resposta certa'

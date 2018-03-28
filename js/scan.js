@@ -13,8 +13,9 @@
         moodles.filter(e => e.src.indexOf('incorrect') === -1).forEach(e => {
             let answer = root.extract.answer(e)
             answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
+            let questionNode = root.extract.node.question(e)
             let question = root.extract.question(e)
-            let questionCleaned = root.filterLinks(question)
+            let questionCleaned = root.filterLinksFromNode(questionNode)
             let questionHash = root.hashCode(questionCleaned)
             let answerHash = root.hashCode(answer)
 
@@ -28,8 +29,9 @@
         moodles.filter(e => e.src.indexOf('incorrect') !== -1).forEach(e => {
             let answer = root.extract.answer(e)
             answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
+            let questionNode = root.extract.node.question(e)
             let question = root.extract.question(e)
-            let questionCleaned = root.filterLinks(question)
+            let questionCleaned = root.filterLinksFromNode(questionNode)
             let questionHash = root.hashCode(questionCleaned)
             let answerHash = root.hashCode(answer)
 
@@ -45,8 +47,9 @@
             .forEach(e => {
                 let answer = root.extract.answer(e)
                 answer = answer.replace(root.REGEX_ANSWER_OPTION, '')
+                let questionNode = root.extract.node.question(e)
                 let question = root.extract.question(e)
-                let questionCleaned = root.filterLinks(question)
+                let questionCleaned = root.filterLinksFromNode(questionNode)
                 let questionHash = root.hashCode(questionCleaned)
 
                 let updates = {}
