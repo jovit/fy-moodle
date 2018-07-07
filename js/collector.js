@@ -124,4 +124,12 @@
             sendResponse({ farewell: 'goodbye' })
         }
     })
+
+    chrome.runtime.onInstalled.addListener(function (object) {
+        if(object.reason === 'install'){
+            chrome.tabs.create({url: "../views/install.html"}, function (tab) {
+                console.log("New tab launched with install page");
+            });
+        }
+    });
 })(this)

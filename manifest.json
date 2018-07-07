@@ -3,7 +3,7 @@
 
     "name": "*FY* MOODLE",
     "description": "Moodle Helper",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "icons": {
         "16": "assets/16.png",
         "48": "assets/48.png",
