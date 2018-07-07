@@ -1,0 +1,40 @@
+{
+  "name":{
+    "message":"FY Moodle"
+  },
+  "description":{
+    "message":""
+  },
+  "exception":{
+    "message":"Algo deu errado"
+  },
+
+  "button_right_answers":{
+    "message":"Clique para mostrar a resposta certa"
+  },
+  "button_wrong_answers":{
+    "message":"Clique para mostrar as respostas erradas"
+  },
+
+  "welcome_page_thanks":{
+    "message":"Obrigado por instalar o FY Moodle."
+  },
+  "welcome_page_instructions_start":{
+    "message":"Para usar a extensão simplesmente abra o Moodle e comece um teste de múltipla escolha."
+  },
+  "welcome_page_instructions_explaination":{
+    "message":"Se tivermos a resposta um botão aparecerá do lado da questão, com ele é possível verificar sua resposta."
+  },
+  "welcome_page_git":{
+    "message":"Veja o projeto no "
+  },
+
+
+  "popup_message":{
+    "message":"Veja o projeto no "
+  },
+
+  "popup_loading_old_tests":{
+    "message":"Carregando os seus moodles antigos..."
+  }
+}

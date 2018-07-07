@@ -23,9 +23,9 @@
                     updates[`${name}/${questionHashOldFilter}/`] = null
                     root.database.database().ref().update(updates)
                     root._gaq.push(['_trackEvent', 'answer', name + '-porting-answer'])
-                } 
+                }
             })
-            
+
             db = root.database.database().ref(`${name}/${questionHash}/`)
             db.on('value', function(snapshot) {
                 if (snapshot.val()) {
@@ -65,10 +65,10 @@
                                             button = document.createElement('input')
                                             button.className = 'show-right'
                                             button.type = 'button'
-                                            button.value = 'Clique para mostrar a resposta certa'
+                                            button.value = chrome.i18n.getMessage("button_right_answers")
                                             question.parentNode.appendChild(button)
                                         }
-                                        
+
                                         button.addEventListener('click', () => {
                                             answer.setAttribute('style', `background: ${root.colours.correct}`)
                                         })
@@ -81,7 +81,7 @@
                                             button.className = 'show-wrong'
                                             button.type = 'button'
                                             button.setAttribute('style', `background: ${root.colours.incorrect}`)
-                                            button.value = 'Clique para mostrar as respostas erradas'
+                                            button.value = chrome.i18n.getMessage("button_wrong_answers")
                                             question.parentNode.appendChild(button)
                                         }
 
@@ -98,7 +98,7 @@
                                                 let xpctdnswr = snapshot.val().answer
                                                 let button = document.createElement('input')
                                                 button.type = 'button'
-                                                button.value = 'Clique para mostrar a resposta certa'
+                                                button.value = chrome.i18n.getMessage("button_right_answers")
                                                 button.addEventListener('click', () => {
                                                     let span = document.createElement('span')
                                                     span.innerHTML = xpctdnswr

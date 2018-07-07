@@ -1,0 +1,39 @@
+{
+  "name":{
+    "message":""
+  },
+  "description":{
+    "message":""
+  },
+  "exception":{
+    "message":"Something went wrong"
+  },
+
+  "button_right_answers":{
+    "message":"Click here to show right answers"
+  },
+  "button_wrong_answers":{
+    "message":"Click here to show wrong answers"
+  },
+
+  "welcome_page_thanks":{
+    "message":"Thank you for installing FY Moodle."
+  },
+  "welcome_page_instructions_start":{
+    "message":"To use it simply go to Moodle and start a multiple choice exercise."
+  },
+  "welcome_page_instructions_explaination":{
+    "message":"If we have the answers buttons will appear next to the question, making it possible to check your answer."
+  },
+  "welcome_page_git":{
+    "message":"Check the project on "
+  },
+
+  "popup_message":{
+    "message":"Check the project on "
+  },
+
+  "popup_loading_old_tests":{
+    "message":"Getting your old moodle tests..."
+  }
+}

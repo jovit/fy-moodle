@@ -24,7 +24,7 @@
         let popup = document.createElement('div')
         popup.id = "loading-popup"
         popup.style = "text-align:center;display:fixed;position:fixed;bottom:0px; opacity: 0.7; width:100%;height:50px;background:yellow;z-index:90; padding-top:15px; color=#000;"
-        popup.innerText = "Carregando os seus moodles antigos..."
+        popup.innerText = chrome.i18n.getMessage("popup_loading_old_tests")
         document.body.appendChild(popup)
 
         chrome.runtime.sendMessage({ greeting: 'hello', page: document.documentElement.innerHTML },
