@@ -11,15 +11,19 @@
         <h1 class="title">FY Moodle</h1>
         <br>
         <p>
-          Obrigado por instalar o FY Moodle.
+          <script>document.write(chrome.i18n.getMessage('welcome_page_thanks'))</script>
         </p>
         <p>
-          Para usar a extensão simplesmente abra o Moodle e comece um teste.
+          <script>document.write(chrome.i18n.getMessage('welcome_page_instructions_start'))</script>
           <br>
-          Se tivermos a resposta um botão aparecerá do lado da questão, com ele é possível verificar sua resposta.
+          <script>document.write(chrome.i18n.getMessage('welcome_page_instructions_explaination'))</script>
         </p>
         <br><br><br>
-        <p class="about__update">Veja o projeto no <a href="https://github.com/jovit/fy-moodle" target="_blank">Github</a></p>
+
+        <p class="about__update">
+          <script>document.write(chrome.i18n.getMessage('welcome_page_git'))</script>
+          <a href="https://github.com/jovit/fy-moodle" target="_blank">Github</a>
+        </p>
       </div>
     </div>
   </body>
