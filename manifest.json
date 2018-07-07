@@ -3,12 +3,13 @@
 
     "name": "*FY* MOODLE",
     "description": "Moodle Helper",
-    "version": "1.4.1",
+    "version": "1.4.2",
     "icons": {
         "16": "assets/16.png",
         "48": "assets/48.png",
         "128": "assets/128.png"
     },
+    "default_locale": "en",
     "permissions": ["webNavigation", "storage", "alarms", "*://*.ggte.unicamp.br/eam/*"],
     "background": {
         "scripts": ["js/ga.js", "js/firebase.js", "js/axios.min.js", "js/constants.js", "js/collector.js"],

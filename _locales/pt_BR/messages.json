@@ -1,0 +1,32 @@
+{
+  "name":{
+    "message":""
+  },
+  "description":{
+    "message":""
+  },
+  "exception":{
+    "message":""
+  },
+
+  "button_right_answers":{
+    "message":""
+  },
+  "button_wrong_answers":{
+    "message":""
+  },
+
+  "welcome_page_thanks":{
+    "message":""
+  },
+  "welcome_page_instructions_start":{
+    "message":""
+  },
+  "welcome_page_instructions_explaination":{
+    "message":""
+  },
+
+  "popup_message":{
+    "message":""
+  },
+}
